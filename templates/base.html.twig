@@ -13,6 +13,41 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="{{ path('app_accueil') }}">
+                    <img src="/logo/PearPhone.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    PearPhone
+                </a>
+                <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto ">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('app_produit_index') }}">Produits</a>
+                        </li>
+                        {% if app.user %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Mon panier</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    <ul class="navbar-nav mr-auto ">
+                        <li class="nav-item dropdown">
+                            {% if app.user %}
+                                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ app.user.nom ~ " " ~ app.user.prenom }}
+                                </a>
+                            {% else %}
+                                <a class="nav-link" href="{{ path('app_login') }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Connexion / Inscription
+                                </a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        {% block body %}
+        {% endblock %}
     </body>
 </html>

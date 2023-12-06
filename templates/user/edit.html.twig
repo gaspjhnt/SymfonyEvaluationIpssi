@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer un utilisateur{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="mx-auto mt-5" style="max-width: 400px;">
+            <h1 class="h3 mb-3 font-weight-normal text-center">Editer un utilisateur</h1>
+
+            {{ form_start(form) }}
+
+            <div class="form-group">
+                {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+
+            <button type="submit" class="btn btn-lg btn-primary btn-block mt-3">Mettre à jour</button>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}
