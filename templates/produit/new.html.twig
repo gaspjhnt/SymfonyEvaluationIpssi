@@ -1,11 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Produit{% endblock %}
+{% block title %}Create Produit{% endblock %}
 
 {% block body %}
-    <h1>Create new Produit</h1>
+    <div class="container">
+        <div class="mx-auto mt-5" style="max-width: 400px;">
+            <h1 class="h3 mb-3 font-weight-normal text-center">Create new Produit</h1>
 
-    {{ include('produit/_form.html.twig') }}
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+            </div>
 
-    <button type="button" class="btn btn-dark" onclick="window.location.href='{{ path('app_produit_index') }}'">Back to list</button>
+            {{ form_end(form) }}
+
+            <button type="button" class="btn btn-dark btn-block mt-3" onclick="window.location.href='{{ path('app_produit_index') }}'">Back to List</button>
+        </div>
+    </div>
 {% endblock %}

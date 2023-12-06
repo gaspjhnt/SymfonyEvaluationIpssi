@@ -6,8 +6,10 @@ namespace App\Entity;
 use App\Repository\ProduitRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Produit
 {
     #[ORM\Id]
@@ -16,19 +18,26 @@ class Produit
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
     private ?string $Nom = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\NotBlank()]
     private ?string $Description = null;
 
     #[ORM\Column]
+    #[Assert\PositiveOrZero()]
     private ?float $Prix = null;
 
     #[ORM\Column]
+    #[Assert\PositiveOrZero()]
     private ?int $Stock = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Photo = null;
+
+    #[ORM\OneToOne(mappedBy: 'produit', cascade: ['persist', 'remove'])]
+    private ?ContenuPanier $contenuPanier = null;
 
     public function getId(): ?int
     {
@@ -102,5 +111,22 @@ class Produit
             unlink(__DIR__.'/../../public/uploads/'.$this->Photo);
         }
         return true;
+    }
+
+    public function getContenuPanier(): ?ContenuPanier
+    {
+        return $this->contenuPanier;
+    }
+
+    public function setContenuPanier(ContenuPanier $contenuPanier): static
+    {
+        // set the owning side of the relation if necessary
+        if ($contenuPanier->getProduit() !== $this) {
+            $contenuPanier->setProduit($this);
+        }
+
+        $this->contenuPanier = $contenuPanier;
+
+        return $this;
     }
 }
