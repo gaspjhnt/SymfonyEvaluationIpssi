@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+
 use App\Repository\ProduitRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -92,5 +93,14 @@ class Produit
         $this->Photo = $Photo;
 
         return $this;
+    }
+
+    #[ORM\PostRemove]
+    public function deletePhoto()
+    {
+        if ($this->Photo != null) {
+            unlink(__DIR__.'/../../public/uploads/'.$this->Photo);
+        }
+        return true;
     }
 }

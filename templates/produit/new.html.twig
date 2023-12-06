@@ -7,5 +7,5 @@
 
     {{ include('produit/_form.html.twig') }}
 
-    <a href="{{ path('app_produit_index') }}">back to list</a>
+    <button type="button" class="btn btn-dark" onclick="window.location.href='{{ path('app_produit_index') }}'">Back to list</button>
 {% endblock %}
