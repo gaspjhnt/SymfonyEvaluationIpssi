@@ -25,7 +25,11 @@
                 <td>{{ produit.Description }}</td>
                 <td>{{ produit.Prix }}</td>
                 <td>{{ produit.Stock }}</td>
-                <td>{{ produit.Photo }}</td>
+                <td>
+                    {% if produit.Photo is not null %}
+                        <img src="{{ asset('uploads/images/' ~ produit.Photo) }}" style="width:100px;" alt="">
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
                     <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
@@ -39,5 +43,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_produit_new') }}">Create new</a>
+    <button type="button" class="btn btn-dark" onclick="window.location.href='{{ path('app_produit_new') }}'">Create New</button>
 {% endblock %}
