@@ -16,7 +16,6 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Utilisateur</th>
-                <th scope="col">Date d'achat</th>
                 <th scope="col">Contenu</th>
             </tr>
             </thead>
@@ -30,7 +29,6 @@
                                 {{ panier.user.nom ~ " " ~ panier.user.prenom }}
                             </a>
                         </td>
-                        <td>{{ panier.dateAchat ? panier.dateAchat|date('d-m-Y') : 'Pas encore commandé.' }}</td>
                         <td>
                             {% for contenu in panier.contenuPaniers %}
                                 <a href="{{ path('app_produit_show', {'id': contenu.produit.id}) }}">

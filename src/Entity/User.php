@@ -26,6 +26,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\NotBlank()]
+    #[Assert\Email]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -35,14 +36,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\PasswordStrength([
+        'message' => 'Votre mot de passe est trop facile à trouver.'
+    ])]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\PositiveOrZero()]
+    #[Assert\NotBlank]
     private ?string $Nom = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\PositiveOrZero()]
+    #[Assert\NotBlank]
     private ?string $Prenom = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Panier::class, orphanRemoval: true)]

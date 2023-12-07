@@ -13,39 +13,36 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-// This RegistrationFormType allows users to enter their email address, surname, first name and password, 
-// and to accept the terms and conditions for registration. Validation constraints are applied to guarantee the quality of the data entered.
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        // Create a form field for each property of the User entity.
         $builder
+            //Ajout du type pour forcer l'utilisateur a rentrer un email
             ->add('email', EmailType::class)
             ->add('nom')
             ->add('prenom')
+            //Demande pour accepter les conditions d'utilisations
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'J\'accepte les conditions',
                 'mapped' => false,
                 'constraints' => [
-                    // Required to accept the terms and conditions.
                     new IsTrue([
-                        'message' => 'Vous devez accpeter nos terms.',
+                        'message' => 'Vous devez accepter nos terms.',
                     ]),
                 ],
             ])
+            //Gestion du mot de passe pour avoir un champs opérationnel et sécuritaire
             ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Veuillez entrer un mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
+                        'minMessage' => 'Votre mot de passe doit faire {{ limit }} charactères minimum',
                         'max' => 4096,
                     ]),
                 ],

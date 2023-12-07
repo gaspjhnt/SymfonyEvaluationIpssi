@@ -10,18 +10,17 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-// This ProductType form lets you enter product information such as name, description, price and stock, 
-// and also allows you to upload an image of the product, specifying validation constraints on file type and size.
+
 class ProduitType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        // Create a form field for each property of the Product entity.
         $builder
             ->add('Nom')
             ->add('Description')
             ->add('Prix')
             ->add('Stock')
+            //Champs spécifique pour l'ajout d'image
             ->add('Photo', FileType::class, [
                 'label' => 'Photo (JPG, PNG, GIF)',
                 'mapped' => false,
@@ -38,7 +37,6 @@ class ProduitType extends AbstractType
                     ])
                 ],
             ])
-            // Create a form field for each property of the Product entity.
             ->add('Envoyer', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-dark'],
             ])
@@ -47,7 +45,6 @@ class ProduitType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        // Configure the type of entity associated with the form.
         $resolver->setDefaults([
             'data_class' => Produit::class,
         ]);

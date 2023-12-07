@@ -21,7 +21,7 @@ class ProduitController extends AbstractController
     #[Route('/', name: 'app_produit_index', methods: ['GET'])]
     public function index(ProduitRepository $produitRepository): Response
     {
-        // We retrieve all the products from the database using Doctrine and pass them to a Twig template for display.
+        //Recupération de tous les produits en bdd et envoie à la vue
         return $this->render('produit/index.html.twig', [
             'produits' => $produitRepository->findAll(),
         ]);
@@ -31,12 +31,12 @@ class ProduitController extends AbstractController
     #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        // We create a new product and pass it to a Twig template for display.
+        // Création du nv produit
         $produit = new Produit();
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
-        // We check if the form has been submitted and if it is valid.
+        // Verif du form de création
         if ($form->isSubmitted() && $form->isValid()) {
 
             $imageFile = $form->get('Photo')->getData();
@@ -50,6 +50,7 @@ class ProduitController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
+                    //Renvoie d'erreur
                     $this->addFlash('danger', 'Erreur lors de l\'import de votre image');
                 }
                 $produit->setPhoto($newFilename);
@@ -58,6 +59,7 @@ class ProduitController extends AbstractController
             $entityManager->persist($produit);
             $entityManager->flush();
 
+            //Renvoie de reussite
             $this->addFlash('success', 'Produit ajouté avec succès');
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -70,6 +72,7 @@ class ProduitController extends AbstractController
     #[Route('/{id}', name: 'app_produit_show', methods: ['GET'])]
     public function show(Produit $produit): Response
     {
+        //Envoie d'un produit spécifique à la vue
         return $this->render('produit/show.html.twig', [
             'produit' => $produit,
         ]);
@@ -79,14 +82,15 @@ class ProduitController extends AbstractController
     #[Route('/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
-
-        // We retrieve the product to be modified from the database using Doctrine and pass it to a Twig template for display.
+        //Prépa du formulaire
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
+        //Verif du formulaire
         if ($form->isSubmitted() && $form->isValid()) {
             $imageFile = $form->get('Photo')->getData();
 
+            //Gestion de l'image
             if ($imageFile) {
                 $newFilename = uniqid().'.'.$imageFile->guessExtension();
 
@@ -99,6 +103,7 @@ class ProduitController extends AbstractController
                         unlink($this->getParameter('upload_directory') . $produit->getPhoto());
                     }
                 } catch (FileException $e) {
+                    //Envoie d'erreur
                     $this->addFlash('danger', 'Erreur lors de l\'import de votre image');
                 }
                 $produit->setPhoto($newFilename);
@@ -106,6 +111,7 @@ class ProduitController extends AbstractController
             $entityManager->persist($produit);
             $entityManager->flush();
 
+            //Envoie de réussite
             $this->addFlash('success', 'Produit modifié avec succès');
 
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
@@ -121,6 +127,7 @@ class ProduitController extends AbstractController
     #[Route('/delete/{id}', name: 'app_produit_delete')]
     public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
+        //Supression du produit
         $entityManager->remove($produit);
         $entityManager->flush();
 

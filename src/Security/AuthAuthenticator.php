@@ -15,8 +15,9 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
-
-// This class is responsible for authenticating users who try to log in to the application.
+/*
+ * Fichier généré automatiquement pour gérer l'authentification
+ */
 class AuthAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
@@ -27,20 +28,19 @@ class AuthAuthenticator extends AbstractLoginFormAuthenticator
     {
     }
 
-    // This method is called when the user tries to log in.
+    // Méthode appellé lors de la connexion
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
 
-        // We store the email address in the session so that it can be displayed in the login form if the user enters an incorrect password.
+        //Stockage de l'email dans la session
         $request->getSession()->set(SecurityRequestAttributes::LAST_USERNAME, $email);
 
-        // We return a Passport object containing the user's email address and password.
         return new Passport(
             new UserBadge($email),
             new PasswordCredentials($request->request->get('password', '')),
             [
-                // We add a CSRF token check to protect against CSRF attacks.
+                // Ajout d'un toek CSRF pour evité les attaques.
                 new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
                 new RememberMeBadge(),
             ]
@@ -49,14 +49,12 @@ class AuthAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        // Authentication succeeded. We retrieve the URL to which the user wanted to go before being redirected to the login page.
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 
-        // For example:
+        //Redirection vers l'accueil
         return new RedirectResponse($this->urlGenerator->generate('app_accueil'));
-        // throw new \Exception();
     }
 
     protected function getLoginUrl(Request $request): string

@@ -11,9 +11,11 @@
 <br>
 <div class="text-center">
     <h1>PearPhone</h1>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_produit_index') }}" class="btn btn-dark">Administration produit</a>
+    {% endif %}
 </div>
 
-{# This Twig file creates a basic layout for displaying products with their names, images and prices on the "PearPhone" home page. #}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
