@@ -20,15 +20,17 @@
             <div class="row">
                 {% for produit in produits %}
                     {% if produit.Photo is not null %}
-                        <div class="col-md-4 mb-4">
-                            <div class="card h-100 shadow">
-                                <div class="card-body text-center d-flex flex-column">
-                                    <h5 class="card-title mb-0">{{ produit.Nom }}</h5>
-                                    <img src="{{ asset('uploads/images/' ~ produit.Photo) }}" class="card-img-top mt-3 flex-grow-1" alt="...">
-                                    <p class="card-text text-muted mt-3">{{ produit.Prix }} €</p>
-                                </div>
+                            <div class="col-md-4 mb-4">
+                                <a href="{{ path('app_produit_show', { 'id': produit.id }) }}" class="text-decoration-none">
+                                    <div class="card h-100 shadow">
+                                        <div class="card-body text-center d-flex flex-column">
+                                            <h5 class="card-title mb-0">{{ produit.Nom }}</h5>
+                                            <img src="{{ asset('uploads/images/' ~ produit.Photo) }}" class="card-img-top mt-3 flex-grow-1" alt="...">
+                                            <p class="card-text text-muted mt-3">{{ produit.Prix }} €</p>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </div>
                     {% endif %}
                 {% endfor %}
             </div>
