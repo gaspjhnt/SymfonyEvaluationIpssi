@@ -40,7 +40,6 @@ class PanierController extends AbstractController
     public function show(EntityManagerInterface $entityManager): Response
     {
         // We retrieve the basket of the connected user
-        $panier = $this->getUser()->getPanier();
         $paniers = $this->getUser()->getPaniers();
         $paniersToSend = null;
 
