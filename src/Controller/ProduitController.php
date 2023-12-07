@@ -12,9 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-// This controller is responsible for managing CRUD (Create, Read, Update, Delete) 
-// operations for the Product entity in a Symfony application.
 #[Route('/produit')]
 class ProduitController extends AbstractController
 {
@@ -27,6 +26,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -74,6 +74,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
@@ -115,6 +116,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_produit_delete', methods: ['POST'])]
     public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
