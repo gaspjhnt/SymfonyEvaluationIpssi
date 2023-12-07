@@ -7,6 +7,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+// Represents the individual items contained in a shopping cart, with attributes such as quantity, date, 
+// and relationships to Cart and Product entities, providing a structure for managing the items contained in a shopping cart.
 #[ORM\Entity(repositoryClass: ContenuPanierRepository::class)]
 class ContenuPanier
 {

@@ -13,12 +13,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+// This controller is responsible for managing CRUD (Create, Read, Update, Delete) 
+// operations for the Product entity in a Symfony application.
 #[Route('/produit')]
 class ProduitController extends AbstractController
 {
     #[Route('/', name: 'app_produit_index', methods: ['GET'])]
     public function index(ProduitRepository $produitRepository): Response
     {
+        // We retrieve all the products from the database using Doctrine and pass them to a Twig template for display.
         return $this->render('produit/index.html.twig', [
             'produits' => $produitRepository->findAll(),
         ]);
@@ -27,10 +30,12 @@ class ProduitController extends AbstractController
     #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        // We create a new product and pass it to a Twig template for display.
         $produit = new Produit();
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
+        // We check if the form has been submitted and if it is valid.
         if ($form->isSubmitted() && $form->isValid()) {
 
             $imageFile = $form->get('Photo')->getData();
@@ -55,7 +60,6 @@ class ProduitController extends AbstractController
             $this->addFlash('success', 'Produit ajouté avec succès');
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
-
         return $this->render('produit/new.html.twig', [
             'produit' => $produit,
             'form' => $form,
@@ -74,6 +78,7 @@ class ProduitController extends AbstractController
     public function edit(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
 
+        // We retrieve the product to be modified from the database using Doctrine and pass it to a Twig template for display.
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
@@ -113,6 +118,7 @@ class ProduitController extends AbstractController
     #[Route('/{id}', name: 'app_produit_delete', methods: ['POST'])]
     public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
+        // delete a product after confirmation via a CSRF token.
         if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->request->get('_token'))) {
             $entityManager->remove($produit);
             $entityManager->flush();
