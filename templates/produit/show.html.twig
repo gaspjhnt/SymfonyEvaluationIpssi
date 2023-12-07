@@ -34,6 +34,8 @@
         </tbody>
     </table>
 
+    <a class="nav-link" href="{{ path('app_panier_add', {'id': produit.id}) }}">Ajouter au panier</a>
+
     <button type="button" class="btn btn-dark" onclick="window.location.href='{{ path('app_produit_index') }}'">Back to list</button>
     <button type="button" class="btn btn-dark" onclick="window.location.href='{{ path('app_produit_edit', {'id': produit.id}) }}'">Edit</button>
 
