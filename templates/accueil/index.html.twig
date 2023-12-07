@@ -1,22 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AccueilController!{% endblock %}
+{% block title %}PearPhone{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }} <!-- Si vous utilisez des feuilles de style définies dans le fichier 'base.html.twig' -->
+    <link rel="stylesheet" href="{{ asset('/accueil.css') }}">
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<br>
+<div class="text-center">
+    <h1>PearPhone</h1>
+</div>
 
-    <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/symfonyEvaluation/src/Controller/AccueilController.php'|file_link(0) }}">src/Controller/AccueilController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/symfonyEvaluation/templates/accueil/index.html.twig'|file_link(0) }}">templates/accueil/index.html.twig</a></code></li>
-    </ul>
-
-
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="row">
+                {% for produit in produits %}
+                    {% if produit.Photo is not null %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 shadow">
+                                <div class="card-body text-center d-flex flex-column">
+                                    <h5 class="card-title mb-0">{{ produit.Nom }}</h5>
+                                    <img src="{{ asset('uploads/images/' ~ produit.Photo) }}" class="card-img-top mt-3 flex-grow-1" alt="...">
+                                    <p class="card-text text-muted mt-3">{{ produit.Prix }} €</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
