@@ -14,11 +14,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+// This controller is responsible for the entire user registration process, from submission of 
+// the registration form to persistence of user data and automatic authentication after successful registration.
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AuthAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
+        // We create a new user and pass it to a Twig template for display.
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -34,7 +37,7 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+            // Do anything else you need here, like send an email
 
             return $userAuthenticator->authenticateUser(
                 $user,
@@ -43,6 +46,7 @@ class RegistrationController extends AbstractController
             );
         }
 
+        // Otherwise, we display the registration form.
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);

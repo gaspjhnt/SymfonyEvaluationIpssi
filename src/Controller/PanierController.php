@@ -13,12 +13,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+// This controller manages basket-related operations in the Symfony application, such as displaying all baskets, 
+// displaying a specific basket and deleting a basket after confirmation via a CSRF token.
+
 #[Route('/panier')]
 class PanierController extends AbstractController
 {
     #[Route('/', name: 'app_panier_index', methods: ['GET'])]
     public function index(PanierRepository $panierRepository): Response
     {
+        // Create a new basket
         return $this->render('panier/index.html.twig', [
             'paniers' => $panierRepository->findAll(),
         ]);
@@ -27,6 +32,7 @@ class PanierController extends AbstractController
     #[Route('/{id}', name: 'app_panier_show', methods: ['GET'])]
     public function show(): Response
     {
+        // We retrieve the basket of the connected user
         $panier = $this->getUser()->getPanier();
         return $this->render('panier/show.html.twig', [
             'panier' => $panier,
@@ -36,6 +42,7 @@ class PanierController extends AbstractController
     #[Route('/{id}', name: 'app_panier_delete', methods: ['POST'])]
     public function delete(Request $request, Panier $panier, EntityManagerInterface $entityManager): Response
     {
+        // We delete the basket of the connected user
         if ($this->isCsrfTokenValid('delete'.$panier->getId(), $request->request->get('_token'))) {
             $entityManager->remove($panier);
             $entityManager->flush();
