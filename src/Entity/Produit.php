@@ -120,7 +120,7 @@ class Produit
     public function deletePhoto()
     {
         if ($this->Photo != null) {
-            unlink(__DIR__.'/../../public/uploads/'.$this->Photo);
+            unlink(__DIR__.'/../../public/uploads/images/'.$this->Photo);
         }
         return true;
     }
