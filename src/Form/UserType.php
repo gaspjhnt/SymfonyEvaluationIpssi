@@ -18,15 +18,7 @@ class UserType extends AbstractType
         $builder
             ->add('email')
             ->add('Nom')
-            ->add('Prenom')
-            ->add('roles', ChoiceType::class, [
-                'choices' => [
-                    'Admin' => 'ROLE_ADMIN',
-                    'Utilisateur' => 'ROLE_USER',
-                ],
-                'multiple' => true,
-                'expanded' => true,
-            ]);
+            ->add('Prenom');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

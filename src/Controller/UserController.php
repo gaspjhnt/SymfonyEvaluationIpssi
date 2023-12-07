@@ -38,8 +38,20 @@ class UserController extends AbstractController
         // We retrieve the user's profile
         if ($this->getUser()->getId() === $user->getId() || in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
 
+            $paniers = $user->getPaniers();
+
+            $paniersDone = [];
+            // Recherche des paniers finalisés
+            for ($i = 0; $i < count($paniers); $i++) {
+                if ($paniers[$i]->isEtat()) {
+                    array_push($paniersDone, $paniers[$i]);
+                }
+            }
+
+
             // We display the user's profile
             return $this->render('user/show.html.twig', [
+                'commandes' => $paniersDone,
                 'user' => $user,
             ]);
         }

@@ -22,9 +22,6 @@
                 </a>
                 <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto ">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ path('app_produit_index') }}">Produits</a>
-                        </li>
                         {% if app.user %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('app_panier_show') }}">Mon panier</a>

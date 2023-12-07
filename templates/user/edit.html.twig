@@ -21,12 +21,6 @@
                 {{ form_row(form.Prenom, {'attr': {'class': 'form-control', 'placeholder': 'Prénom'}}) }}
             </div>
 
-            {% if is_granted('ROLE_ADMIN') %}
-                <div class="form-group">
-                    {{ form_row(form.roles, {'attr': {'class': 'form-control'}}) }}
-                </div>
-            {% endif %}
-
             <button type="submit" class="btn btn-lg btn-primary btn-block mt-3">Mettre à jour</button>
 
             {{ form_end(form) }}

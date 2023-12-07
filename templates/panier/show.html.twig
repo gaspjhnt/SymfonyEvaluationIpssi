@@ -60,7 +60,7 @@
             </div>
             {% if app.user == panier.user %}
                 <div class="d-flex justify-content-center">
-                    <a href="{{ path('app_accueil') }}" class="btn btn-dark">Payer</a>
+                    <a href="{{ path('app_panier_order', {'id': panier.id}) }}" class="btn btn-dark">Payer</a>
                 </div>
             {% endif %}
         {% else %}

@@ -190,4 +190,19 @@ class PanierController extends AbstractController
         // Redirigez vers la page du panier après la suppression
         return $this->redirectToRoute('app_panier_show', [], Response::HTTP_SEE_OTHER);
     }
+
+
+    #[Route('/order/{id}', name: 'app_panier_order')]
+    public function order(Panier $panier, EntityManagerInterface $entityManager): Response
+    {
+        $panier->setEtat(true);
+        $panier->setDateAchat(new \DateTime());
+        $entityManager->persist($panier);
+        $entityManager->flush();
+
+        return $this->render('panier/order.html.twig', [
+            'panier' => $panier,
+        ]);
+    }
+
 }

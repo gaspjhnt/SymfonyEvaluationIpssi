@@ -3,8 +3,8 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="mx-auto mt-5" style="max-width: 400px;">
+    <div class="container mt-5">
+        <div class="mx-auto" style="max-width: 400px;">
             <h1 class="h3 mb-3 font-weight-normal text-center">User</h1>
 
             <table class="table">
@@ -31,10 +31,10 @@
             </table>
 
             <div class="row">
-                {% if is_granted('ROLE_ADMIN') and app.user == user%}
-                <div class="col">
-                    <a href="{{ path('app_admin') }}" class="btn btn-dark btn-block mt-3">Administration</a>
-                </div>
+                {% if is_granted('ROLE_ADMIN') and app.user == user %}
+                    <div class="col">
+                        <a href="{{ path('app_admin') }}" class="btn btn-dark btn-block mt-3">Administration</a>
+                    </div>
                 {% endif %}
 
                 <div class="col">
@@ -43,17 +43,52 @@
 
                 {% if app.user == user %}
                     <div class="col">
-                        <a href="{{ path('app_logout') }}" class="btn btn-primary btn-danger mt-3">Deconnexion</a>
+                        <a href="{{ path('app_logout') }}" class="btn btn-danger btn-block mt-3">Deconnexion</a>
                     </div>
                 {% endif %}
             </div>
         </div>
 
-
         {% if app.user == user %}
             <hr>
             <h4 class="text-center">Listes des commandes passées </h4>
-        {% endif %}
 
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Identifiant</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Réalisée le </th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set total = 0 %}
+                {% for commande in commandes %}
+                    <tr>
+                        <td>{{ commande.id }}</td>
+                        <td>
+                            {% set total = 0 %}
+                            {% for contenu in commande.contenuPaniers %}
+                                {% set total = total + contenu.produit.prix * contenu.quantite %}
+                            {% endfor %}
+                            {{ total }}€
+                        </td>
+                        <td>{{ commande.dateAchat|date('d-m-Y') }}</td>
+                        <td>
+                            <a href="{{ path('app_panier_order', {'id': commande.id}) }}" class="btn btn-dark">👀</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center">
+                            Aucune commande effectuée
+                            <a href="{{ path('app_accueil') }}"> commencer mes achats</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
     </div>
 {% endblock %}

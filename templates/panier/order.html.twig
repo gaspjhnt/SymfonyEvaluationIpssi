@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Votre Commande</h1>
+
+        {% if panier is not empty %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="text-center mb-4">
+                    Commande de <a href="{{ path('app_user_show',{'id':panier.user.id}) }}">
+                        {{ panier.user.nom ~ " " ~ panier.user.prenom }}
+                    </a>
+                    <hr>
+                </div>
+            {% endif %}
+
+            <p class="text-center mb-3">Réalisée le {{ panier.dateAchat|date('d-m-Y') }}</p>
+
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title mb-3">Produits commandés:</h3>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Image</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Quantité</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% set total = 0 %}
+                        {% for contenu in panier.contenuPaniers %}
+                            <tr>
+                                <td>
+                                    {% if contenu.produit.Photo is not null %}
+                                        <img src="{{ asset('uploads/images/' ~ contenu.produit.Photo) }}" style="width:100px;" alt="">
+                                    {% endif %}
+                                </td>
+                                <td>{{ contenu.produit.nom }}</td>
+                                <td>{{ contenu.produit.prix }}€</td>
+                                <td>{{ contenu.quantite }}</td>
+                                <td>{{ contenu.produit.prix * contenu.quantite }}€</td>
+                            </tr>
+                            {% set total = total + contenu.produit.prix * contenu.quantite %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <div class="d-flex justify-content-between mt-3">
+                        <h5>Total payé:</h5>
+                        <h5>{{ total }}€</h5>
+                    </div>
+                </div>
+            </div>
+
+            {% if app.user == panier.user %}
+                <div class="d-flex justify-content-center mt-3">
+                    <a href="{{ path('app_user_show', {'id': panier.user.id}) }}" class="btn btn-dark">Voir vos commandes</a>
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="d-flex flex-column">
+                <div class="alert alert-info" role="alert">
+                    Votre commande est vide... (comment êtes-vous arrivé ici?)
+                </div>
+                <a href="{{ path('app_accueil') }}" class="btn btn-primary">Commencer vos achats</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
