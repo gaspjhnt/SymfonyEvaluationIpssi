@@ -2,6 +2,11 @@
 
 {% block title %}Liste des Produits{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('/accueil.css') }}">
+{% endblock %}
+
 {% block body %}
     <div class="container mt-5">
         <h1>Liste des Produits</h1>

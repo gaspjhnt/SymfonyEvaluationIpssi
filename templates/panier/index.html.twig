@@ -2,6 +2,11 @@
 
 {% block title %}Liste des Paniers{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('/accueil.css') }}">
+{% endblock %}
+
 {% block body %}
     <div class="container mt-5">
         <h1 class="mb-4 text-center">Liste des Paniers</h1>
