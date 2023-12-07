@@ -17,21 +17,20 @@ class Panier
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Assert\NotNull()]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateAchat = null;
 
     #[ORM\Column]
     #[Assert\NotNull()]
     private ?bool $etat = null;
 
-    #[ORM\OneToOne(inversedBy: 'panier', cascade: ['persist', 'remove'])]
-    #[Assert\NotNull()]
-    private ?User $user = null;
-
     #[ORM\OneToMany(mappedBy: 'panier', targetEntity: ContenuPanier::class, orphanRemoval: true)]
     #[Assert\NotNull()]
-    private Collection $contenuPaniers;
+    private Collection $contenuPaniers ;
+
+    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -67,17 +66,6 @@ class Panier
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): static
-    {
-        $this->user = $user;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, ContenuPanier>
@@ -105,6 +93,18 @@ class Panier
                 $contenuPanier->setPanier(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
