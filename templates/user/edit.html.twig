@@ -2,6 +2,11 @@
 
 {% block title %}Editer un utilisateur{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('/accueil.css') }}">
+{% endblock %}
+
 {% block body %}
     <div class="container mt-5">
         <div class="mx-auto" style="max-width: 400px;">

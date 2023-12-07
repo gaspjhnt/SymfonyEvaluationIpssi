@@ -2,6 +2,11 @@
 
 {% block title %}Liste des Paniers{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('/accueil.css') }}">
+{% endblock %}
+
 {% block body %}
     <div class="container mt-5">
         <h1 class="mb-4 text-center">Liste des Paniers</h1>
@@ -44,6 +49,6 @@
             </tbody>
         </table>
 
-        <a href="{{ path('app_admin') }}" class="btn btn-primary">Retour au Dashboard</a>
+        <a href="{{ path('app_admin') }}" class="btn btn-dark">Retour au Dashboard</a>
     </div>
 {% endblock %}
