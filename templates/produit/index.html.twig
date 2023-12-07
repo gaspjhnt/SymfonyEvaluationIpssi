@@ -1,47 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produit index{% endblock %}
+{% block title %}Liste des Produits{% endblock %}
 
 {% block body %}
-    <h1>Produit</h1>
+    <div class="container mt-5">
+        <h1>Liste des Produits</h1>
 
-    <table class="table table-dark table-hover">
-        <thead>
+        <table class="table">
+            <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Prix</th>
-                <th>Stock</th>
-                <th>Photo</th>
-                <th>actions</th>
+                <th scope="col">Id</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Description</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Photo</th>
+                <th scope="col">Actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for produit in produits %}
-            <tr>
-                <td>{{ produit.id }}</td>
-                <td>{{ produit.Nom }}</td>
-                <td>{{ produit.Description }}</td>
-                <td>{{ produit.Prix }}</td>
-                <td>{{ produit.Stock }}</td>
-                <td>
-                    {% if produit.Photo is not null %}
-                        <img src="{{ asset('uploads/images/' ~ produit.Photo) }}" style="width:100px;" alt="">
-                    {% endif %}
-                </td>
-                <td>
-                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
-                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for produit in produits %}
+                <tr>
+                    <td>{{ produit.id }}</td>
+                    <td>{{ produit.Nom }}</td>
+                    <td>{{ produit.Description }}</td>
+                    <td>{{ produit.Prix }}</td>
+                    <td>{{ produit.Stock }}</td>
+                    <td>
+                        {% if produit.Photo is not null %}
+                            <img src="{{ asset('uploads/images/' ~ produit.Photo) }}" style="width:100px;" alt="">
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-info btn-sm">Voir</a>
+                        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-warning btn-sm">Éditer</a>
+                        <a href="{{ path('app_produit_delete', {'id': produit.id}) }}" class="btn btn-danger btn-sm">Supprimer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <button type="button" class="btn btn-dark" onclick="window.location.href='{{ path('app_produit_new') }}'">Create New</button>
+        <button type="button" class="btn btn-dark" onclick="window.location.href='{{ path('app_produit_new') }}'">Créer Nouveau</button>
+    </div>
 {% endblock %}

@@ -17,6 +17,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[Route('/produit')]
 class ProduitController extends AbstractController
 {
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/', name: 'app_produit_index', methods: ['GET'])]
     public function index(ProduitRepository $produitRepository): Response
     {
@@ -117,14 +118,11 @@ class ProduitController extends AbstractController
     }
 
     #[IsGranted('ROLE_ADMIN')]
-    #[Route('/{id}', name: 'app_produit_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'app_produit_delete')]
     public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
-        // delete a product after confirmation via a CSRF token.
-        if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($produit);
-            $entityManager->flush();
-        }
+        $entityManager->remove($produit);
+        $entityManager->flush();
 
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
     }
