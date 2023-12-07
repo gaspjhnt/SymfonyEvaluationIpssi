@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard Admin{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Administration</h1>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Liste des utilisateurs</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Voir tous les utilisateurs.</p>
+                <a href="{{ path('app_user_index') }}" class="btn btn-primary">Voir les utilisateurs</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Liste des paniers non vendus</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Voir tous les paniers non vendus.</p>
+                <a href="{{ path('app_panier_index') }}" class="btn btn-primary">Voir les paniers non vendus</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

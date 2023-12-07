@@ -1,40 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}Liste des Utilisateurs{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4">Liste des Utilisateurs</h1>
 
-    <table class="table">
-        <thead>
+        <table class="table">
+            <thead>
             <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>actions</th>
+                <th scope="col">Id</th>
+                <th scope="col">Email</th>
+                <th scope="col">Roles</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.Nom }}</td>
-                <td>{{ user.Prenom }}</td>
-                <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    <td>{{ user.Nom }}</td>
+                    <td>{{ user.Prenom }}</td>
+                    <td>
+                        <a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-info btn-sm">Voir</a>
+                        <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-warning btn-sm">Éditer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
+        <a href="{{ path('app_admin') }}" class="btn btn-primary">Retour au Dashboard</a>
+    </div>
 {% endblock %}

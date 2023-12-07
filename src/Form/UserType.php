@@ -18,12 +18,8 @@ class UserType extends AbstractType
         $builder
             ->add('email')
             ->add('Nom')
-            ->add('Prenom');
-
-        $user = $options['data']; // Récupérer l'utilisateur transmis au formulaire
-
-        if (in_array('ROLE_ADMIN', $user->getRoles())) {
-            $builder->add('roles', ChoiceType::class, [
+            ->add('Prenom')
+            ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Admin' => 'ROLE_ADMIN',
                     'Utilisateur' => 'ROLE_USER',
@@ -31,7 +27,6 @@ class UserType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ]);
-        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void

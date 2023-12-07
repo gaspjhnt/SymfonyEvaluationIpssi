@@ -1,37 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Panier index{% endblock %}
+{% block title %}Liste des Paniers{% endblock %}
 
 {% block body %}
-    <h1>Panier index</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4 text-center">Liste des Paniers</h1>
 
-    <table class="table">
-        <thead>
+        <table class="table">
+            <thead>
             <tr>
-                <th>Id</th>
-                <th>DateAchat</th>
-                <th>Etat</th>
-                <th>actions</th>
+                <th scope="col">Id</th>
+                <th scope="col">Utilisateur</th>
+                <th scope="col">Date d'achat</th>
+                <th scope="col">Contenu</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for panier in paniers %}
-            <tr>
-                <td>{{ panier.id }}</td>
-                <td>{{ panier.dateAchat ? panier.dateAchat|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ panier.etat ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_panier_show', {'id': panier.id}) }}">show</a>
-                    <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for panier in paniers %}
+                {% if not panier.etat %}
+                    <tr>
+                        <td>{{ panier.id }}</td>
+                        <td>
+                            <a href="{{ path('app_user_show', {'id': panier.user.id}) }}">
+                                {{ panier.user.nom ~ " " ~ panier.user.prenom }}
+                            </a>
+                        </td>
+                        <td>{{ panier.dateAchat ? panier.dateAchat|date('d-m-Y') : 'Pas encore commandé.' }}</td>
+                        <td>
+                            {% for contenu in panier.contenuPaniers %}
+                                <a href="{{ path('app_produit_show', {'id': contenu.produit.id}) }}">
+                                    {{ contenu.produit.nom }}
+                                </a>
+                                x {{ contenu.quantite }} -
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endif %}
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_panier_new') }}">Create new</a>
+        <a href="{{ path('app_admin') }}" class="btn btn-primary">Retour au Dashboard</a>
+    </div>
 {% endblock %}

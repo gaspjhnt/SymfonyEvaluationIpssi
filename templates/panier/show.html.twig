@@ -7,6 +7,14 @@
         <h1 class="text-center mb-4">Mon Panier</h1>
 
         {% if panier is not empty %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="text-center">
+                    Panier de <a href="{{ path('app_user_show',{'id':panier.user.id}) }}">
+                        {{ panier.user.nom ~ " " ~ panier.user.prenom }}
+                    </a>
+                    <hr>
+                </div>
+            {% endif %}
             <table class="table">
                 <thead>
                 <tr>
@@ -37,7 +45,7 @@
                         <td>{{ contenu.produit.prix * contenu.quantite }}€</td>
                         <td>
                             <a href="{{ path('app_panier_remove', {'id': contenu.produit.id}) }}" class="btn btn-dark">🗑️</a>
-                            {# <a href="{{ path('app_panier_deleteLine') }}" class="btn btn-dark">❌</a> #}
+                            <a href="{{ path('app_panier_removeLine', {'id': contenu.produit.id})  }}" class="btn btn-dark">❌</a>
                             <a href="{{ path('app_produit_show', {'id': contenu.produit.id}) }}" class="btn btn-dark">👀</a>
                         </td>
                     </tr>
@@ -49,14 +57,22 @@
                 <h5>Total à payer </h5>
                 <h5>{{ total }}€</h5>
             </div>
-            <div class="d-flex justify-content-center">
-                <a href="{{ path('app_accueil') }}" class="btn btn-dark">Continuer</a>
-            </div>
+            {% if app.user == panier.user %}
+                <div class="d-flex justify-content-center">
+                    <a href="{{ path('app_accueil') }}" class="btn btn-dark">Payer</a>
+                </div>
+            {% endif %}
         {% else %}
-            <div class="alert alert-info" role="alert">
-                Votre panier est vide !
+            <div class="d-flex flex-column">
+                <div class="alert alert-info" role="alert">
+                    Votre panier est vide !
+                </div>
+                <a href="{{ path('app_accueil') }}" class="btn btn-primary">Commencer vos achats</a>
             </div>
-            <a href="{{ path('app_accueil') }}" class="btn btn-primary">Commencer vos achats</a>
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_panier_index') }}" class="btn btn-primary">Retour à la liste des paniers</a>
         {% endif %}
     </div>
 {% endblock %}

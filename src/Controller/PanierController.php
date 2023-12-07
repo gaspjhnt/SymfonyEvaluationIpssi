@@ -32,15 +32,23 @@ class PanierController extends AbstractController
     }
 
     #[Route('/show', name: 'app_panier_show', methods: ['GET'])]
-    public function show(): Response
+    public function show(EntityManagerInterface $entityManager): Response
     {
         $paniers = $this->getUser()->getPaniers();
         $paniersToSend = null;
 
         for($i = 0; $i < count($paniers); $i++){
-            if (!$paniers[$i]->isEtat()){
-                $paniersToSend = $paniers[$i];
+
+            // Vérifiez si le panier est vide après la suppression
+            if ($paniers[$i]->getContenuPaniers()->isEmpty()) {
+                $entityManager->remove($paniers[$i]);
+                $entityManager->flush();
+            } else {
+                if (!$paniers[$i]->isEtat()){
+                    $paniersToSend = $paniers[$i];
+                }
             }
+
         }
 
         return $this->render('panier/show.html.twig', [
@@ -133,6 +141,41 @@ class PanierController extends AbstractController
 
                     break; // Sortez de la boucle une fois que le produit est trouvé
                 }
+            }
+        }
+
+        // Redirigez vers la page du panier après la suppression
+        return $this->redirectToRoute('app_panier_show', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    #[Route('/removeLine/{id}', name: 'app_panier_removeLine')]
+    public function removeLine(String $id, EntityManagerInterface $entityManager): Response
+    {
+        $produit = $entityManager->getRepository(Produit::class)->findOneBy(['id' => $id]);
+
+        $paniers = $this->getUser()->getPaniers();
+        $panier = null;
+
+        // Recherche d'un panier non finalisé
+        for ($i = 0; $i < count($paniers); $i++) {
+            if (!$paniers[$i]->isEtat()) {
+                $panier = $paniers[$i];
+            }
+        }
+
+        if ($panier !== null) {
+            $contenuPaniers = $panier->getContenuPaniers();
+
+            foreach ($contenuPaniers as $contenuPanier) {
+                if ($contenuPanier->getProduit() === $produit) {
+                    // On supprime le produit du contenu du panier (même si plusieurs fois)
+                    $entityManager->remove($contenuPanier);
+                }
+                // Enregistrez les changements
+                $entityManager->flush();
+
+                break; // Sortez de la boucle une fois que le produit est trouvé
             }
         }
 

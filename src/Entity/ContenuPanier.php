@@ -26,9 +26,10 @@ class ContenuPanier
     #[ORM\JoinColumn(nullable: false)]
     private ?Panier $panier = null;
 
-    #[ORM\OneToOne(inversedBy: 'contenuPanier', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'contenuPaniers')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Produit $produit = null;
+
 
     public function getId(): ?int
     {
@@ -76,10 +77,11 @@ class ContenuPanier
         return $this->produit;
     }
 
-    public function setProduit(Produit $produit): static
+    public function setProduit(?Produit $produit): static
     {
         $this->produit = $produit;
 
         return $this;
     }
+    
 }

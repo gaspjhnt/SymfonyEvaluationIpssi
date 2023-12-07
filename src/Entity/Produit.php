@@ -4,6 +4,8 @@ namespace App\Entity;
 
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -36,8 +38,14 @@ class Produit
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Photo = null;
 
-    #[ORM\OneToOne(mappedBy: 'produit', cascade: ['persist', 'remove'])]
-    private ?ContenuPanier $contenuPanier = null;
+    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: ContenuPanier::class, orphanRemoval: true)]
+    private Collection $contenuPaniers;
+
+    public function __construct()
+    {
+        $this->contenuPaniers = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -113,20 +121,35 @@ class Produit
         return true;
     }
 
-    public function getContenuPanier(): ?ContenuPanier
+    /**
+     * @return Collection<int, ContenuPanier>
+     */
+    public function getContenuPaniers(): Collection
     {
-        return $this->contenuPanier;
+        return $this->contenuPaniers;
     }
 
-    public function setContenuPanier(ContenuPanier $contenuPanier): static
+    public function addContenuPanier(ContenuPanier $contenuPanier): static
     {
-        // set the owning side of the relation if necessary
-        if ($contenuPanier->getProduit() !== $this) {
+        if (!$this->contenuPaniers->contains($contenuPanier)) {
+            $this->contenuPaniers->add($contenuPanier);
             $contenuPanier->setProduit($this);
         }
 
-        $this->contenuPanier = $contenuPanier;
+        return $this;
+    }
+
+    public function removeContenuPanier(ContenuPanier $contenuPanier): static
+    {
+        if ($this->contenuPaniers->removeElement($contenuPanier)) {
+            // set the owning side to null (unless already changed)
+            if ($contenuPanier->getProduit() === $this) {
+                $contenuPanier->setProduit(null);
+            }
+        }
 
         return $this;
     }
+
+
 }

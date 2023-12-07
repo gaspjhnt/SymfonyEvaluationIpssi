@@ -31,9 +31,9 @@
             </table>
 
             <div class="row">
-                {% if is_granted('ROLE_ADMIN') %}
+                {% if is_granted('ROLE_ADMIN') and app.user == user%}
                 <div class="col">
-                    <a href="{{ path('app_user_index') }}" class="btn btn-dark btn-block mt-3">Administration</a>
+                    <a href="{{ path('app_admin') }}" class="btn btn-dark btn-block mt-3">Administration</a>
                 </div>
                 {% endif %}
 
@@ -41,16 +41,19 @@
                     <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-primary btn-block mt-3">Edit</a>
                 </div>
 
-                <div class="col">
-                    <a href="{{ path('app_logout') }}" class="btn btn-primary btn-danger mt-3">Deconnexion</a>
-                </div>
+                {% if app.user == user %}
+                    <div class="col">
+                        <a href="{{ path('app_logout') }}" class="btn btn-primary btn-danger mt-3">Deconnexion</a>
+                    </div>
+                {% endif %}
             </div>
         </div>
 
-        <hr>
 
-        <h4 class="text-center">Listes des commandes passées </h4>
-
+        {% if app.user == user %}
+            <hr>
+            <h4 class="text-center">Listes des commandes passées </h4>
+        {% endif %}
 
     </div>
 {% endblock %}
