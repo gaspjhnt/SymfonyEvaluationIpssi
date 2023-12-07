@@ -8,6 +8,10 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
+// The Product entity represents a product with attributes such as name, description, price, stock 
+// and associated photo. It is linked to the CartContent entity to define the relationship between products and cart contents, 
+// and manages the physical deletion of photo files associated with products once they have been removed from the database.
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 class Produit

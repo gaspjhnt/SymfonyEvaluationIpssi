@@ -9,6 +9,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+// The Shopping Cart entity represents a shopping cart with information such as the date of purchase, 
+// the state of the cart, associated content items and the user who owns the cart.
 #[ORM\Entity(repositoryClass: PanierRepository::class)]
 class Panier
 {

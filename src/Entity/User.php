@@ -11,6 +11,10 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
+// The User entity represents a user with attributes such as email, roles, surname, first name and a collection 
+// of shopping carts associated with this user. It implements interfaces for authentication and password management,
+// and uses validation annotations to ensure the integrity of user data.
+
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface

@@ -64,14 +64,14 @@ class PanierController extends AbstractController
         $paniers = $this->getUser()->getPaniers();
         $panier = null;
 
-        // Recherche d'un panier non finalisé
+        // Create a new basket
         for ($i = 0; $i < count($paniers); $i++) {
             if (!$paniers[$i]->isEtat()) {
                 $panier = $paniers[$i];
             }
         }
 
-        // Si aucun panier non finalisé n'est trouvé, créez-en un
+        // If there is no basket, create a new one
         if ($panier == null) {
             $panier = new Panier();
             $panier->setUser($this->getUser());
@@ -80,18 +80,18 @@ class PanierController extends AbstractController
             $entityManager->flush();
         }
 
-        // Vérifier si le produit est déjà dans le panier
+        // Search for the product in the basket
         $contenuPanier = $entityManager->getRepository(ContenuPanier::class)->findOneBy([
             'panier' => $panier,
             'produit' => $produit,
         ]);
 
         if ($contenuPanier) {
-            // Si le produit est déjà dans le panier, incrémente la quantité et met à jour la date
+            // If the product is in the basket, increment the quantity
             $contenuPanier->setQuantite($contenuPanier->getQuantite() + 1);
             $contenuPanier->setDate(new \DateTime());
         } else {
-            // Si le produit n'est pas dans le panier, créez un nouveau ContenuPanier
+            // If the product is not in the basket, add it
             $contenuPanier = new ContenuPanier();
             $contenuPanier->setPanier($panier);
             $contenuPanier->setDate(new \DateTime());
@@ -100,7 +100,7 @@ class PanierController extends AbstractController
             $entityManager->persist($contenuPanier);
         }
 
-        // Enregistrez les changements
+        // Save the changes
         $entityManager->flush();
 
         return $this->redirectToRoute('app_panier_show', [], Response::HTTP_SEE_OTHER);
@@ -115,7 +115,7 @@ class PanierController extends AbstractController
         $paniers = $this->getUser()->getPaniers();
         $panier = null;
 
-        // Recherche d'un panier non finalisé
+        // Set the basket to which the product will be added
         for ($i = 0; $i < count($paniers); $i++) {
             if (!$paniers[$i]->isEtat()) {
                 $panier = $paniers[$i];
@@ -127,23 +127,23 @@ class PanierController extends AbstractController
 
             foreach ($contenuPaniers as $contenuPanier) {
                 if ($contenuPanier->getProduit() === $produit) {
-                    // Si la quantité est supérieure à 1, décrémentez la quantité
+                    // If the product is in the basket, decrement the quantity
                     if ($contenuPanier->getQuantite() > 1) {
                         $contenuPanier->setQuantite($contenuPanier->getQuantite() - 1);
                     } else {
-                        // Sinon, supprimez le produit du contenu du panier
+                        // Else, delete the product from the basket
                         $entityManager->remove($contenuPanier);
                     }
 
-                    // Enregistrez les changements
+                    // Save the changes
                     $entityManager->flush();
 
-                    break; // Sortez de la boucle une fois que le produit est trouvé
+                    break; // Exit the loop
                 }
             }
         }
 
-        // Redirigez vers la page du panier après la suppression
+        // Redirect to the basket
         return $this->redirectToRoute('app_panier_show', [], Response::HTTP_SEE_OTHER);
     }
 
