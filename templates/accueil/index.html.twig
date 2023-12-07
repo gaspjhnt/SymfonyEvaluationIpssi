@@ -2,6 +2,11 @@
 
 {% block title %}PearPhone{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }} <!-- Si vous utilisez des feuilles de style définies dans le fichier 'base.html.twig' -->
+    <link rel="stylesheet" href="{{ asset('/accueil.css') }}">
+{% endblock %}
+
 {% block body %}
 <br>
 <div class="text-center">
@@ -9,15 +14,24 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-2">
-            {% for produit in produits %}
-                {% if produit.Photo is not null %}
-                    <img src="{{ asset('uploads/images/' ~ produit.Photo) }}" style="width:200px;" alt="">
-                    <p>{{ produit.Nom }}</p>
-                    <p>{{ produit.Prix }} €</p>
-                {% endif %}
-            {% endfor %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="row">
+                {% for produit in produits %}
+                    {% if produit.Photo is not null %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 shadow">
+                                <div class="card-body text-center d-flex flex-column">
+                                    <h5 class="card-title mb-0">{{ produit.Nom }}</h5>
+                                    <img src="{{ asset('uploads/images/' ~ produit.Photo) }}" class="card-img-top mt-3 flex-grow-1" alt="...">
+                                    <p class="card-text text-muted mt-3">{{ produit.Prix }} €</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
+</div>
 {% endblock %}
