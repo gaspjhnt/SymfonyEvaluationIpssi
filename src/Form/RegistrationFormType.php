@@ -13,24 +13,28 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+// This RegistrationFormType allows users to enter their email address, surname, first name and password, 
+// and to accept the terms and conditions for registration. Validation constraints are applied to guarantee the quality of the data entered.
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // Create a form field for each property of the User entity.
         $builder
             ->add('email', EmailType::class)
             ->add('nom')
             ->add('prenom')
             ->add('agreeTerms', CheckboxType::class, [
-                                'mapped' => false,
+                'mapped' => false,
                 'constraints' => [
+                    // Required to accept the terms and conditions.
                     new IsTrue([
                         'message' => 'Vous devez accpeter nos terms.',
                     ]),
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
-                                // instead of being set onto the object directly,
+                // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
@@ -51,6 +55,7 @@ class RegistrationFormType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        // set default data class for the form
         $resolver->setDefaults([
             'data_class' => User::class,
         ]);
