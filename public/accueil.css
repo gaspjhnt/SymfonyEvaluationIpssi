@@ -1,16 +1,14 @@
-.card {
-    transition: transform 0.3s, box-shadow 0.3s;
+.style-card {
     border-radius: 18px;
-    /* max-width: 600px; */
+    max-width: 20vw!important;
+    text-align: center;
+    margin: 0 auto;
 }
 
-.card:hover {
+.style-card:hover {
     transform: scale(1.02);
-    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
     transition: all .3s cubic-bezier(0,0,.5,1);
 }
-
-
 
 .nav-link{
     color: #54BA36;
@@ -18,4 +16,7 @@
 
 .btn-dark:hover{
     color: #54BA36;
+}
+
+.card-text{
 }
