@@ -70,7 +70,6 @@ panier:
     empty_cart: Votre panier est vide !
     buy: Commencer vos achats
 
-
 produit:
   message:
     success:
@@ -206,7 +205,7 @@ user:
       nom: Nom
       prenom: Prénom
     btn:
-      administartion: Administartion
+      administartion: Administration
       edit: Éditer
       deconnexion : Déconnexion
     order:

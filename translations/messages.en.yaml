@@ -129,3 +129,103 @@ produit:
 register:
   page_title: Registration
   title: Registration
+    form:
+    email: Email
+    nom: Name
+    prenom: First name
+    terms:
+      label: I accept the conditions
+      message: You must accept the conditions.
+    password:
+      label: Password
+      not_blank: Please enter a password
+  already_register: Already registered?
+  btn:
+    connect: Login
+    register: Sign up
+
+login:
+  page_title: Connection
+  already_log: You are logged in as
+  logout: Disconnect
+  title: Connection
+  form:
+    email: Email
+    email_placeholder: Email (john@doe.com)
+    password: Password
+  btn:
+    not_register: Not registered yet?
+    register: Sign up
+    singin: Connection
+
+
+user:
+  success: Successfully edited profile
+
+  form:
+    email: Email
+    email_placeholder: Email (john@doe.com)
+    nom: Name
+    nom_placeholder: Name (Doe)
+    prenom: First name
+    prenom_placeholder: First name (John)
+
+  edit:
+    page_title: Editing a user
+    title: Editing a user
+    btn: Update
+
+  index:
+    page_title: User List
+    title: User List
+    table:
+      id: User ID
+      email: Email
+      roles: Roles
+      nom: Name
+      prenom: First name
+      actions: Actions
+      btn:
+        see: View
+        edit: Edit
+      no_user: No users found
+    back: Back to Dashboard
+
+  show:
+    page_title: Users
+    title: Users
+    table:
+      email: Email
+      roles: Roles
+      nom: Name
+      prenom: First name
+    btn:
+      administartion: Administration
+      edit: Edit
+      deconnexion : Logout
+    order:
+      title: List of past orders
+      table:
+        id: Order number
+        total: Total
+        date: Realized on
+        action: Actions
+      no_order: No orders placed
+      begin_buy: Start shopping
+
+base:
+  nav:
+    panier: My Cart
+    login_register: Login / Register
+
+
+message:
+  produit:
+    nom: Product name cannot be empty.
+    description: Product description cannot be empty.
+    prix: Price must be greater than or equal to zero.
+    stock: Stock must be greater than or equal to zero.
+  user:
+    email: Please enter an E-Mail.
+    nom: The name cannot be empty.
+    prenom: The first name cannot be empty.
