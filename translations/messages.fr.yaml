@@ -164,7 +164,6 @@ login:
     register: S'inscrire
     singin: connexion
 
-
 user:
   success: Profil édité avec succès
 
@@ -224,7 +223,6 @@ base:
     panier: Mon Panier
     login_register: Connexion / Inscription
 
-
 message:
   produit:
     nom: Le nom du produit ne peux pas être vide.
@@ -232,6 +230,6 @@ message:
     prix: Le prix doit être supérieur ou égal a zéro.
     stock: Le stock doit être supérieur ou égal a zéro.
   user:
-    email: Veillez entrer un E-Mail.
+    email: Veuillez entrer un E-Mail.
     nom: Le nom ne peux pas être vide.
     prenom: Le prénom ne peux pas être vide.
