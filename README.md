@@ -1,3 +1,5 @@
+Gaspard Johanet & Océane Princep
+
 # Exercice E-commerce
 
 __Vous devez réaliser une boutique e-commerce en groupes de 3 maximum sur le thème de votre choix.__
