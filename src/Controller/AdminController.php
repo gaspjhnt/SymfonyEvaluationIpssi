@@ -14,7 +14,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class AdminController extends AbstractController
 {
     // Simple route pour dashboard admin
-    #[Route('/admin', name: 'app_admin')]
+    #[Route('/{_locale}/admin', name: 'app_admin')]
     public function index(EntityManagerInterface $entityManager): Response
     {
 

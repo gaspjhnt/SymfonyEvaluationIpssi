@@ -15,7 +15,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 // Is granted General pour sécurisé les profils et autre.
 #[IsGranted('ROLE_USER')]
-#[Route('/user')]
+#[Route('/{_locale}/user')]
 class UserController extends AbstractController
 {
 

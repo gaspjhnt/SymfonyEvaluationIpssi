@@ -1,0 +1,131 @@
+accueil:
+  btn_admin_produit: Product Administration
+  no_product: No product available.
+
+admin:
+  user:
+    title: User list
+    see: View all users.
+    btn: View users
+  panier:
+    title: List of unsold cart
+    see: View all unsold cart.
+    btn: View unsold cart
+  produit:
+    title: List of products
+    see: View all products.
+    btn: View products
+
+panier:
+  success:
+    add_article: Item successfully added.
+    remove_one: Successful suppression.
+    remove_line: Successful suppression.
+
+  index:
+    page_title: List of carts
+    title: List of carts
+
+    table:
+      identifiant: User ID
+      user: User
+      contenu: Contents
+      no_table: No carts found
+    back_dashboard: Back to Dashboard
+
+  order:
+    page_title: Order
+    title: Your order
+    date: Realized on 
+    products: Products ordered
+
+    table:
+      image: Image
+      nom: Name
+      prix: Price
+      quantite: Quantity
+      total: Total
+
+    total: Total paid
+    see_commands: View your orders
+    empty_command: Your order is empty...
+    begin_buy: Start shopping
+
+  show:
+    page_title: Cart
+    title: My Cart
+
+    table:
+      image: Image
+      nom: Name
+      prix: Price
+      description: Description
+      quantite: Quantity
+      date: Date
+      total: Total
+      actions: Actions
+
+    total: Total payable
+    btn_buy: Pay
+    empty_cart: Your cart is empty!
+    buy: Start shopping
+
+
+produit:
+  message:
+    success:
+      product_add: Product successfully added
+      product_edit: Product successfully modified
+    error:
+      image: Error importing your image
+      image_edit: Error importing your image
+
+  edit:
+    page_title: Product modification
+    title: Product modification
+    back: Back to list
+    delete: Delete
+
+  index:
+    page_title: List of products
+    title: List of products
+    table:
+      identifiant: User ID
+      nom: Name
+      description: Description
+      prix: Price
+      stock: Inventory
+      image: Image
+      actions: Actions
+      btn:
+        see: View
+        edit: Edit
+        delete: Delete
+      no_product: No products found
+    btn:
+      create: Create
+      back_dashboard: Back to Dashboard
+
+  new:
+    page_title: Create a product
+    title: Create a new product
+    back: Back to list
+    form:
+      photo: Photo (JPG, PNG, GIF)
+
+  show:
+    page_title: Product
+    title: Product
+    table:
+      nom: Name
+      prix: Price
+      stock: Inventory
+      description: Description
+    btn:
+      add_cart: Add to cart
+      edit: Edit
+      delete: Delete
+
+register:
+  page_title: Registration
+  title: Registration
