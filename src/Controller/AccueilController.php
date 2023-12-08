@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AccueilController extends AbstractController
 {
     //Route principale
-    #[Route('/', name: 'app_accueil')]
+    #[Route('/{_locale}/', name: 'app_accueil')]
     public function index(EntityManagerInterface $em): Response
     {
         // Récupération pour affichage de tous les produits

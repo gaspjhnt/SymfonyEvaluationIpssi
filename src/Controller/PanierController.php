@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 
-#[Route('/panier')]
+#[Route('/{_locale}/panier')]
 class PanierController extends AbstractController
 {
     #[IsGranted('ROLE_SUPER_ADMIN')]

@@ -14,7 +14,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 // Is granted General pour sécurisé les profils et autre.
 #[IsGranted('ROLE_USER')]
-#[Route('/user')]
+#[Route('/{_locale}/user')]
 class UserController extends AbstractController
 {
 

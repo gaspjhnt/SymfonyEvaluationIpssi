@@ -16,7 +16,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use function Symfony\Component\Translation\t;
 
-#[Route('/produit')]
+#[Route('/{_locale}/produit')]
 class ProduitController extends AbstractController
 {
     #[IsGranted('ROLE_ADMIN')]
