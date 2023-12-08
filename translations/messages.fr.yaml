@@ -75,6 +75,7 @@ produit:
     success:
       product_add: Produit ajouté avec succès
       product_edit: Produit modifié avec succès
+      product_delete: Produit supprimé avec succès
     error:
       image:  Erreur lors de l'import de votre image
       image_edit: Erreur lors de l'import de votre image
@@ -205,7 +206,7 @@ user:
       nom: Nom
       prenom: Prénom
     btn:
-      administartion: Administration
+      administration: Administration
       edit: Éditer
       deconnexion : Déconnexion
     order:

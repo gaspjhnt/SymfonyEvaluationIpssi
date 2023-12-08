@@ -114,7 +114,7 @@ class ProduitController extends AbstractController
             $entityManager->flush();
 
             //Envoie de réussite
-            $this->addFlash('success', $translator->trans('panier.message.success.panier_edit'));
+            $this->addFlash('success', $translator->trans('produit.message.success.product_edit'));
 
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -127,11 +127,13 @@ class ProduitController extends AbstractController
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/delete/{id}', name: 'app_produit_delete')]
-    public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         //Supression du produit
         $entityManager->remove($produit);
         $entityManager->flush();
+
+        $this->addFlash('success', $translator->trans('produit.message.success.product_delete'));
 
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
     }

@@ -76,6 +76,7 @@ produit:
     success:
       product_add: Product successfully added
       product_edit: Product successfully modified
+      product_delete: Product successfully deleted
     error:
       image: Error importing your image
       image_edit: Error importing your image
@@ -129,7 +130,7 @@ produit:
 register:
   page_title: Registration
   title: Registration
-    form:
+  form:
     email: Email
     nom: Name
     prenom: First name
@@ -200,7 +201,7 @@ user:
       nom: Name
       prenom: First name
     btn:
-      administartion: Administration
+      administration: Administration
       edit: Edit
       deconnexion : Logout
     order:
