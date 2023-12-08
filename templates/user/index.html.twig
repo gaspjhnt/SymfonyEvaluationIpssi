@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Utilisateurs{% endblock %}
+{% block title %}{{ 'user.index.page_title'|trans }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -9,17 +9,17 @@
 
 {% block body %}
     <div class="container mt-5">
-        <h1 class="mb-4">Liste des Utilisateurs</h1>
+        <h1 class="mb-4">{{ 'user.index.title'|trans }}</h1>
 
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Email</th>
-                <th scope="col">Roles</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Prenom</th>
-                <th scope="col">Actions</th>
+                <th scope="col">{{ 'user.index.table.id'|trans }}</th>
+                <th scope="col">{{ 'user.index.table.email'|trans }}</th>
+                <th scope="col">{{ 'user.index.table.roles'|trans }}</th>
+                <th scope="col">{{ 'user.index.table.nom'|trans }}</th>
+                <th scope="col">{{ 'user.index.table.prenom'|trans }}</th>
+                <th scope="col">{{ 'user.index.table.actions'|trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -31,18 +31,18 @@
                     <td>{{ user.Nom }}</td>
                     <td>{{ user.Prenom }}</td>
                     <td>
-                        <a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-info btn-sm">Voir</a>
-                        <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-warning btn-sm">Éditer</a>
+                        <a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-info btn-sm">{{ 'user.index.table.btn.see'|trans }}</a>
+                        <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-warning btn-sm">{{ 'user.index.table.btn.edit'|trans }}</a>
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="6">Aucun enregistrement trouvé</td>
+                    <td colspan="6">{{ 'user.index.table.no_user'|trans }}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
 
-        <a href="{{ path('app_admin') }}" class="btn btn-dark">Retour au Dashboard</a>
+        <a href="{{ path('app_admin') }}" class="btn btn-dark">{{ 'user.index.back'|trans }}</a>
     </div>
 {% endblock %}

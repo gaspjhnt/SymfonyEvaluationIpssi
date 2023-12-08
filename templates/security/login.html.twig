@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}{{ 'login.page_title'|trans }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -18,24 +18,24 @@
 
             {% if app.user %}
                 <div class="alert alert-info" role="alert">
-                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    {{ 'login.already_log'|trans }} {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">{{ 'login.logout'|trans }}</a>
                 </div>
             {% endif %}
 
             <div class="mx-auto mt-5" style="max-width: 400px;">
-                <h1 class="h3 mb-3 font-weight-normal text-center">Connexion</h1>
+                <h1 class="h3 mb-3 font-weight-normal text-center">{{ 'login.title'|trans }}</h1>
 
-                <label for="inputEmail" class="sr-only">Email</label>
-                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" autocomplete="email" required autofocus>
+                <label for="inputEmail" class="sr-only">{{ 'login.form.email'|trans }}</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="{{ 'login.form.email_placeholder'|trans }}" autocomplete="email" required autofocus>
 
-                <label for="inputPassword" class="sr-only">Password</label>
+                <label for="inputPassword" class="sr-only">{{ 'login.form.password'|trans }}</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" autocomplete="current-password" required>
 
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                <p>Pas encore inscrit ? <a href="{{ path('app_register') }}">S'inscrire</a></p>
+                <p>{{ 'login.btn.not_register'|trans }} <a href="{{ path('app_register') }}">{{ 'login.btn.register'|trans }}</a></p>
 
-                <button class="btn btn-lg btn-dark btn-block mt-3" type="submit">Sign in</button>
+                <button class="btn btn-lg btn-dark btn-block mt-3" type="submit">{{ 'login.btn.singin'|trans }}</button>
             </div>
         </form>
     </div>

@@ -24,19 +24,19 @@ class Produit
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank()]
+    #[Assert\NotBlank(message: 'message.produit.nom')]
     private ?string $Nom = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Assert\NotBlank()]
+    #[Assert\NotBlank(message: 'message.produit.description')]
     private ?string $Description = null;
 
     #[ORM\Column]
-    #[Assert\PositiveOrZero()]
+    #[Assert\PositiveOrZero(message: 'message.produit.prix')]
     private ?float $Prix = null;
 
     #[ORM\Column]
-    #[Assert\PositiveOrZero()]
+    #[Assert\PositiveOrZero(message: 'message.produit.stock')]
     private ?int $Stock = null;
 
     #[ORM\Column(length: 255, nullable: true)]

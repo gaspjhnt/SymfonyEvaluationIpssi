@@ -28,7 +28,7 @@
             </div>
 
             <div class="form-group">
-                {{ form_row(registrationForm.plainPassword, { 'attr': {'class': 'form-control', 'placeholder': 'Password'} , 'label': 'Password'}) }}
+                {{ form_row(registrationForm.plainPassword, { 'attr': {'class': 'form-control', 'placeholder': 'Password'} }) }}
             </div>
 
             <div class="form-check mt-3">
@@ -36,9 +36,9 @@
             </div>
 
 
-            <p class="mt-2">Déjà inscrit ? <a href="{{ path('app_login') }}">Se connecter</a></p>
+            <p class="mt-2">{{ 'register.already_register'|trans }} <a href="{{ path('app_login') }}">{{ 'register.btn.connect'|trans }}</a></p>
 
-            <button type="submit" class="btn btn-lg btn-dark btn-block mt-1">Register</button>
+            <button type="submit" class="btn btn-lg btn-dark btn-block mt-1">{{ 'register.btn.register'|trans }}</button>
             {{ form_end(registrationForm) }}
         </div>
     </div>

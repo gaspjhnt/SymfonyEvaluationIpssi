@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}{{ 'user.show.page_title'|trans }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -10,26 +10,26 @@
 {% block body %}
     <div class="container">
         <div class="mx-auto mt-5" style="max-width: 400px;">
-            <h1 class="h3 mb-3 font-weight-normal text-center">User</h1>
+            <h1 class="h3 mb-3 font-weight-normal text-center">{{ 'user.show.title'|trans }}</h1>
 
             <table class="table">
                 <tbody>
                 <tr>
-                    <th>Email</th>
+                    <th>{{ 'user.show.table.email'|trans }}</th>
                     <td>{{ user.email }}</td>
                 </tr>
                 {% if is_granted('ROLE_ADMIN') %}
                     <tr>
-                        <th>Roles</th>
+                        <th>{{ 'user.show.table.roles'|trans }}</th>
                         <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                     </tr>
                 {% endif %}
                 <tr>
-                    <th>Nom</th>
+                    <th>{{ 'user.show.table.nom'|trans }}</th>
                     <td>{{ user.Nom }}</td>
                 </tr>
                 <tr>
-                    <th>Prenom</th>
+                    <th>{{ 'user.show.table.prenom'|trans }}</th>
                     <td>{{ user.Prenom }}</td>
                 </tr>
                 </tbody>
@@ -38,17 +38,17 @@
             <div class="row">
                 {% if is_granted('ROLE_ADMIN') and app.user == user %}
                     <div class="col">
-                        <a href="{{ path('app_admin') }}" class="btn btn-dark btn-block mt-3">Administration</a>
+                        <a href="{{ path('app_admin') }}" class="btn btn-dark btn-block mt-3">{{ 'user.show.btn.administration'|trans }}</a>
                     </div>
                 {% endif %}
 
                 <div class="col">
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-dark btn-block mt-3">Edit</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-dark btn-block mt-3">{{ 'user.show.btn.edit'|trans }}</a>
                 </div>
 
                 {% if app.user == user %}
                     <div class="col">
-                        <a href="{{ path('app_logout') }}" class="btn btn-dark btn-danger mt-3">Deconnexion</a>
+                        <a href="{{ path('app_logout') }}" class="btn btn-dark btn-danger mt-3">{{ 'user.show.btn.deconnexion'|trans }}</a>
                     </div>
                 {% endif %}
             </div>
@@ -57,15 +57,15 @@
 
         {% if app.user == user %}
             <hr>
-            <h4 class="text-center">Listes des commandes passées </h4>
+            <h4 class="text-center">{{ 'user.show.order.title'|trans }}</h4>
 
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">Identifiant</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Réalisée le </th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">{{ 'user.show.order.table.id'|trans }}</th>
+                    <th scope="col">{{ 'user.show.order.table.total'|trans }}</th>
+                    <th scope="col">{{ 'user.show.order.table.date'|trans }}</th>
+                    <th scope="col">{{ 'user.show.order.table.action'|trans }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -88,8 +88,8 @@
                 {% else %}
                     <tr>
                         <td colspan="4" class="text-center">
-                            Aucune commande effectuée
-                            <a href="{{ path('app_accueil') }}"> commencer mes achats</a>
+                            {{ 'user.show.order.no_order'|trans }}
+                            <a href="{{ path('app_accueil') }}">{{ 'user.show.order.begin_buy' }}</a>
                         </td>
                     </tr>
                 {% endfor %}

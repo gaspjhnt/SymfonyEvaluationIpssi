@@ -111,7 +111,13 @@ produit:
     title: Créer un nouveau produit
     back: Retour à la liste
     form:
+      nom: Nom
+      description: Description
+      prix: Prix
+      stock: Stock
       photo: Photo (JPG, PNG, GIF)
+      envoyer: Envoyer
+      mimetype_error: Merci de choisir une image valide (jpg, png, gif)
 
   show:
     page_title: Produit
@@ -129,4 +135,103 @@ produit:
 register:
   page_title: Inscription
   title: Inscription
+  form:
+    email: E-mail
+    nom: Nom
+    prenom: Prénom
+    terms:
+      label: J'accepte les conditions
+      message: Vous devez accepter les condtions.
+    password:
+      label: Mot de passe
+      not_blank: Veuillez entrer un mot de passe
+  already_register: Déjà inscrit ?
+  btn:
+    connect: Se connecter
+    register: S'inscrire
 
+login:
+  page_title: Connexion
+  already_log: Vous êtes connecté en tant que
+  logout: Se déconnecter
+  title: Connexion
+  form:
+    email: E-Mail
+    email_placeholder: E-Mail (john@doe.com)
+    password: Mot de passe
+  btn:
+    not_register: Pas encore inscrit ?
+    register: S'inscrire
+    singin: connexion
+
+
+user:
+  success: Profil édité avec succès
+
+  form:
+    email: E-Mail
+    email_placeholder: E-Mail (john@doe.com)
+    nom: Nom
+    nom_placeholder: Nom (Doe)
+    prenom: Prénom
+    prenom_placeholder: Prénom (John)
+
+  edit:
+    page_title: Éditer un utilisateur
+    title: Éditer un utilisateur
+    btn: Mettre à jour
+
+  index:
+    page_title: Liste des Utilisateurs
+    title: Liste des Utilisateurs
+    table:
+      id: Identifiant
+      email: E-Mail
+      roles: Roles
+      nom: Nom
+      prenom: Prénom
+      actions: Actions
+      btn:
+        see: Voir
+        edit: Éditer
+      no_user: Aucun utilisateur trouvé
+    back: Retour au Dashboard
+
+  show:
+    page_title: Utilisateurs
+    title: Utilisateurs
+    table:
+      email: E-Mail
+      roles: Roles
+      nom: Nom
+      prenom: Prénom
+    btn:
+      administartion: Administartion
+      edit: Éditer
+      deconnexion : Déconnexion
+    order:
+      title: Liste des commandes passées
+      table:
+        id: Numéro de commande
+        total: Total
+        date: Réalisée le
+        action: Actions
+      no_order: Aucune commande effectuée
+      begin_buy: Commencer mes achats
+
+base:
+  nav:
+    panier: Mon Panier
+    login_register: Connexion / Inscription
+
+
+message:
+  produit:
+    nom: Le nom du produit ne peux pas être vide.
+    description: La description du produit ne peux pas être vide.
+    prix: Le prix doit être supérieur ou égal a zéro.
+    stock: Le stock doit être supérieur ou égal a zéro.
+  user:
+    email: Veillez entrer un E-Mail.
+    nom: Le nom ne peux pas être vide.
+    prenom: Le prénom ne peux pas être vide.

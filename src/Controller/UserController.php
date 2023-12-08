@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 // Is granted General pour sécurisé les profils et autre.
 #[IsGranted('ROLE_USER')]
@@ -55,7 +56,7 @@ class UserController extends AbstractController
 
 
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, User $user, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         // Même condition, sécurisation de l'edit.
         if ($this->getUser()->getId() === $user->getId() || in_array('ROLE_SUPER_ADMIN', $this->getUser()->getRoles())) {
@@ -67,7 +68,7 @@ class UserController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Profil édité avec succès');
+                $this->addFlash('success', $translator->trans('user.success'));
                 return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
             }
             return $this->render('user/edit.html.twig', [

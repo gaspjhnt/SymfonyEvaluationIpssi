@@ -19,26 +19,33 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             //Ajout du type pour forcer l'utilisateur a rentrer un email
-            ->add('email', EmailType::class)
-            ->add('nom')
-            ->add('prenom')
+            ->add('email', EmailType::class, [
+                'label' => 'register.form.email',
+            ])
+            ->add('nom', null, [
+                'label' => 'register.form.nom',
+            ])
+            ->add('prenom', null, [
+                'label' => 'register.form.prenom',
+            ])
             //Demande pour accepter les conditions d'utilisations
             ->add('agreeTerms', CheckboxType::class, [
-                'label' => 'J\'accepte les conditions',
+                'label' => 'register.form.terms.label',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'Vous devez accepter nos terms.',
+                        'message' => 'register.form.terms.message',
                     ]),
                 ],
             ])
             //Gestion du mot de passe pour avoir un champs opérationnel et sécuritaire
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
+                'label' => 'register.form.password.label',
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez entrer un mot de passe',
+                        'message' => 'register.form.password.not_blank',
                     ]),
                     new Length([
                         'min' => 6,
