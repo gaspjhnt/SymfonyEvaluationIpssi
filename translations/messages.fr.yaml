@@ -76,3 +76,27 @@ produit:
     error:
       image:  Erreur lors de l'import de votre image
       image_edit: Erreur lors de l'import de votre image
+
+  edit:
+    title: Modification produit
+    back: Retour à la liste
+    delete: Supprimer
+
+  index:
+    title: Liste des Produits
+    table:
+      identifiant: Identifiant
+      nom: Nom
+      description: Description
+      prix: Prix
+      stock: Stock
+      image: Image
+      actions: Actions
+      btn:
+        see: Voir
+        edit: Éditer
+        delete: Supprimer
+      no_product: Aucun produit trouvé
+    btn:
+      create: Créer
+      back_dashboard: Retour au Dashboard
