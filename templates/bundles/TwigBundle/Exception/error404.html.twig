@@ -1,0 +1,13 @@
+{# templates/error/404.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}Erreur 404 - Page non trouvée{% endblock %}
+
+{% block body %}
+    <h1>Page non trouvée</h1>
+    <p>La page que vous cherchez n'a pas été trouvée</p>
+    <p>Le code est : {{status_code}}</p>
+    <p>Le texte est : {{status_text}}</p>
+
+{% endblock %}
