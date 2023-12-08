@@ -111,8 +111,13 @@ produit:
     title: Create a new product
     back: Back to list
     form:
+      nom: Name
+      description: Description
+      prix: Price
+      stock: Inventory
       photo: Photo (JPG, PNG, GIF)
-
+      envoyer: Send
+      mimetype_error: Please select a valid image (jpg, png, gif)
   show:
     page_title: Product
     title: Product
@@ -129,7 +134,7 @@ produit:
 register:
   page_title: Registration
   title: Registration
-    form:
+  form:
     email: Email
     nom: Name
     prenom: First name
@@ -217,7 +222,6 @@ base:
   nav:
     panier: My Cart
     login_register: Login / Register
-
 
 message:
   produit:
