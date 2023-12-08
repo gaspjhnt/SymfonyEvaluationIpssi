@@ -1,0 +1,78 @@
+accueil:
+  btn_admin_produit: Administration produit
+  no_product: Aucun produit disponible.
+
+admin:
+  user:
+    title: Liste des utilisateurs
+    see: Voir tous les utilisateurs.
+    btn: Voir les utilisateurs
+  panier:
+    title: Liste des paniers non vendus
+    see: Voir tous les paniers non vendus.
+    btn: Voir les paniers non vendus
+  produit:
+    title: Liste des produits
+    see: Voir tous les produits.
+    btn: Voir les produits
+
+panier:
+  success:
+    add_article: Article ajouté avec succès.
+    remove_one: Supression reussie.
+    remove_line: Supression reussie.
+
+  index:
+    title: Liste des Paniers
+
+    table:
+      identifiant: Identifiant
+      user: Utilisateur
+      contenu: Contenu
+      no_table: Aucun paniers trouvés
+    back_dashboard: Retour au Dashboard
+
+  order:
+    title: Votre Commande
+    date: Réalisée le
+    products: Produits commandés
+
+    table:
+      image: Image
+      nom: Nom
+      prix: Prix
+      quantite: Quantité
+      total: Total
+
+    total: Total payé
+    see_commands: Voir vos commandes
+    empty_command: Votre commande est vide...
+    begin_buy: Commencer vos achats
+
+  show:
+    title: Mon Panier
+
+    table:
+      image: Image
+      nom: Nom
+      prix: Prix
+      description: Description
+      quantite: Quantité
+      date: Date
+      total: Total
+      actions: Actions
+
+    total: Total à payer
+    btn_buy: Payer
+    empty_cart: Votre panier est vide !
+    buy: Commencer vos achats
+
+
+produit:
+  message:
+    success:
+      product_add: Produit ajouté avec succès
+      product_edit: Produit modifié avec succès
+    error:
+      image:  Erreur lors de l'import de votre image
+      image_edit: Erreur lors de l'import de votre image

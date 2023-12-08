@@ -6,7 +6,6 @@ use App\Entity\ContenuPanier;
 use App\Entity\Panier;
 use App\Entity\Produit;
 use App\Entity\User;
-use App\Form\PanierType;
 use App\Form\ProduitType;
 use App\Repository\PanierRepository;
 use App\Repository\ProduitRepository;
@@ -20,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 
 #[Route('/panier')]
@@ -66,7 +66,7 @@ class PanierController extends AbstractController
     *  Ajout d'une ligne / produit au panier
     */
     #[Route('/{id}', name: 'app_panier_add')]
-    public function addProduct(string $id, EntityManagerInterface $entityManager): Response
+    public function addProduct(string $id, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $produit = $entityManager->getRepository(Produit::class)->findOneBy(['id' => $id]);
 
@@ -109,6 +109,7 @@ class PanierController extends AbstractController
             $entityManager->persist($contenuPanier);
         }
 
+        $this->addFlash('success', $translator->trans('panier.success.add_article'));
         $entityManager->flush();
 
         return $this->redirectToRoute('app_panier_show', [], Response::HTTP_SEE_OTHER);
@@ -119,7 +120,7 @@ class PanierController extends AbstractController
      * Retire un element du panier (ex -1 sur quantité ou suppression du produit si quantité = 1)
      */
     #[Route('/remove/{id}', name: 'app_panier_remove')]
-    public function remove(string $id, EntityManagerInterface $entityManager): Response
+    public function remove(string $id, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $produit = $entityManager->getRepository(Produit::class)->findOneBy(['id' => $id]);
 
@@ -146,7 +147,7 @@ class PanierController extends AbstractController
                         $entityManager->remove($contenuPanier);
                     }
                     $entityManager->flush();
-                    $this->addFlash('success', 'Supression reussie');
+                    $this->addFlash('success', $translator->trans('panier.success.remove_one'));
                     break;
                 }
             }
@@ -158,7 +159,7 @@ class PanierController extends AbstractController
      * Supression d'une ligne du panier peu importe la quantité
      */
     #[Route('/removeLine/{id}', name: 'app_panier_removeLine')]
-    public function removeLine(string $id, EntityManagerInterface $entityManager): Response
+    public function removeLine(string $id, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $produit = $entityManager->getRepository(Produit::class)->findOneBy(['id' => $id]);
 
@@ -181,7 +182,7 @@ class PanierController extends AbstractController
                     $entityManager->remove($contenuPanier);
                 }
                 $entityManager->flush();
-                $this->addFlash('success', 'Supression réussie');
+                $this->addFlash('success', $translator->trans('panier.success.remove_line'));
 
                 break;
             }

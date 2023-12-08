@@ -10,29 +10,20 @@
 
 {% block body %}
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Mon Panier</h1>
+        <h1 class="text-center mb-4">{{ 'panier.show.title'|trans }}</h1>
 
-        {# This Twig file is designed to display the detailed contents of a shopping cart. It presents the products included in the shopping cart with their details, and offers features for interacting with each product, as well as options for browsing or continuing shopping. #}
         {% if panier is not empty %}
-            {% if is_granted('ROLE_ADMIN') %}
-                <div class="text-center">
-                    Panier de <a href="{{ path('app_user_show',{'id':panier.user.id}) }}" class="no-decoration">
-                        {{ panier.user.nom ~ " " ~ panier.user.prenom }}
-                    </a>
-                    <hr>
-                </div>
-            {% endif %}
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">Image</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prix</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Quantité</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">{{ 'panier.show.table.image'|trans }}</th>
+                    <th scope="col">{{ 'panier.show.table.nom'|trans }}</th>
+                    <th scope="col">{{ 'panier.show.table.prix'|trans }}</th>
+                    <th scope="col">{{ 'panier.show.table.description'|trans }}</th>
+                    <th scope="col">{{ 'panier.show.table.quantite'|trans }}</th>
+                    <th scope="col">{{ 'panier.show.table.date'|trans }}</th>
+                    <th scope="col">{{ 'panier.show.table.total'|trans }}</th>
+                    <th scope="col">{{ 'panier.show.table.actions'|trans }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -61,25 +52,21 @@
                 </tbody>
             </table>
             <div class="d-flex justify-content-evenly">
-                <h5>Total à payer </h5>
+                <h5>{{ 'panier.show.total'|trans }} </h5>
                 <h5>{{ total }}€</h5>
             </div>
             {% if app.user == panier.user %}
                 <div class="d-flex justify-content-center">
-                    <a href="{{ path('app_panier_order', {'id': panier.id}) }}" class="btn btn-dark">Payer</a>
+                    <a href="{{ path('app_panier_order', {'id': panier.id}) }}" class="btn btn-dark">{{ 'panier.show.btn_buy'|trans }}</a>
                 </div>
             {% endif %}
         {% else %}
             <div class="d-flex flex-column">
                 <div class="alert alert-info" role="alert">
-                    Votre panier est vide !
+                    {{ 'panier.show.empty_cart'|trans }}
                 </div>
-                <a href="{{ path('app_accueil') }}" class="btn btn-dark">Commencer vos achats</a>
+                <a href="{{ path('app_accueil') }}" class="btn btn-dark">{{ 'panier.show.buy'|trans }}</a>
             </div>
-        {% endif %}
-        <br>
-        {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('app_panier_index') }}" class="btn btn-dark">Retour à la liste des paniers</a>
         {% endif %}
     </div>
 {% endblock %}
