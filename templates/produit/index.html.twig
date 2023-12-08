@@ -9,18 +9,18 @@
 
 {% block body %}
     <div class="container mt-5">
-        <h1>Liste des Produits</h1>
+        <h1>{{ 'produit.index.title'|trans }}</h1>
 
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Description</th>
-                <th scope="col">Prix</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Photo</th>
-                <th scope="col">Actions</th>
+                <th scope="col">{{ 'produit.index.table.identifiant'|trans }}</th>
+                <th scope="col">{{ 'produit.index.table.nom'|trans }}</th>
+                <th scope="col">{{ 'produit.index.table.description'|trans }}</th>
+                <th scope="col">{{ 'produit.index.table.prix'|trans }}</th>
+                <th scope="col">{{ 'produit.index.table.stock'|trans }}</th>
+                <th scope="col">{{ 'produit.index.table.image'|trans }}</th>
+                <th scope="col">{{ 'produit.index.table.actions'|trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -37,22 +37,22 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-info btn-sm">Voir</a>
-                        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-warning btn-sm">Éditer</a>
-                        <a href="{{ path('app_produit_delete', {'id': produit.id}) }}" class="btn btn-danger btn-sm">Supprimer</a>
+                        <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-info btn-sm">{{ 'produit.index.table.btn.see'|trans }}</a>
+                            <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-warning btn-sm">{{ 'produit.index.table.btn.edit'|trans }}</a>
+                            <a href="{{ path('app_produit_delete', {'id': produit.id}) }}" class="btn btn-danger btn-sm">{{ 'produit.index.table.btn.delete'|trans }}</a>
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="7">Aucun enregistrement trouvé</td>
+                    <td colspan="7">{{ 'produit.index.table.no_product'|trans }}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
 
-        <button type="button" class="btn btn-dark" onclick="window.location.href='{{ path('app_produit_new') }}'">Créer Nouveau</button>
+        <button type="button" class="btn btn-dark" onclick="window.location.href='{{ path('app_produit_new') }}'">{{ 'porduit.index.btn.create'|trans }}</button>
 
-        <a href="{{ path('app_admin') }}" class="btn btn-primary">Retour au Dashboard</a>
+        <a href="{{ path('app_admin') }}" class="btn btn-primary">{{ 'porduit.index.btn.back_dashboard'|trans }}</a>
 
     </div>
 {% endblock %}
