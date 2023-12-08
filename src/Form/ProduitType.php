@@ -16,13 +16,13 @@ class ProduitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Nom')
+            ->add('Nom', null,)
             ->add('Description')
             ->add('Prix')
             ->add('Stock')
             //Champs spécifique pour l'ajout d'image
             ->add('Photo', FileType::class, [
-                'label' => 'Photo (JPG, PNG, GIF)',
+                'label' => 'produit.new.form.photo',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [

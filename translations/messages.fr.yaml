@@ -23,6 +23,7 @@ panier:
     remove_line: Supression reussie.
 
   index:
+    page_title: Liste des paniers
     title: Liste des Paniers
 
     table:
@@ -33,6 +34,7 @@ panier:
     back_dashboard: Retour au Dashboard
 
   order:
+    page_title: Commande
     title: Votre Commande
     date: Réalisée le
     products: Produits commandés
@@ -50,6 +52,7 @@ panier:
     begin_buy: Commencer vos achats
 
   show:
+    page_title: Panier
     title: Mon Panier
 
     table:
@@ -78,11 +81,13 @@ produit:
       image_edit: Erreur lors de l'import de votre image
 
   edit:
+    page_title: Modification produit
     title: Modification produit
     back: Retour à la liste
     delete: Supprimer
 
   index:
+    page_title: Liste des produits
     title: Liste des Produits
     table:
       identifiant: Identifiant
@@ -100,3 +105,28 @@ produit:
     btn:
       create: Créer
       back_dashboard: Retour au Dashboard
+
+  new:
+    page_title: Créer un produit
+    title: Créer un nouveau produit
+    back: Retour à la liste
+    form:
+      photo: Photo (JPG, PNG, GIF)
+
+  show:
+    page_title: Produit
+    title: Produit
+    table:
+      nom: Nom
+      prix: Prix
+      stock: Stock
+      description: Description
+    btn:
+      add_cart: Ajouter au panier
+      edit: Éditer
+      delete: Supprimer
+
+register:
+  page_title: Inscription
+  title: Inscription
+

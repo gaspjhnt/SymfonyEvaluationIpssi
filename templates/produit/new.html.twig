@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Create Produit{% endblock %}
+{% block title %}{{ 'produit.new.page_title'|trans }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -10,7 +10,7 @@
 {% block body %}
     <div class="container">
         <div class="mx-auto mt-5" style="max-width: 400px;">
-            <h1 class="h3 mb-3 font-weight-normal text-center">Create new Produit</h1>
+            <h1 class="h3 mb-3 font-weight-normal text-center">{{ 'produit.new.title'|trans }}</h1>
 
             {{ form_start(form) }}
             <div class="form-group">
@@ -19,7 +19,7 @@
 
             {{ form_end(form) }}
 
-            <button type="button" class="btn btn-dark btn-block mt-3" onclick="window.location.href='{{ path('app_produit_index') }}'">Back to List</button>
+            <button type="button" class="btn btn-dark btn-block mt-3" onclick="window.location.href='{{ path('app_produit_index') }}'">{{ 'produit.new.back'|trans }}</button>
         </div>
     </div>
 {% endblock %}

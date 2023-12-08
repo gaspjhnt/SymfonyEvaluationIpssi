@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produit{% endblock %}
+{% block title %}{{ 'produit.show.page_title'|trans }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -10,29 +10,29 @@
 {% block body %}
     <div class="container mt-5">
         <div class="card">
-            <h1 class="card-title text-center mt-3 mb-0">Produit</h1>
+            <h1 class="card-title text-center mt-3 mb-0">{{ 'produit.show.page_title'|trans }}</h1>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="{{ asset('uploads/images/' ~ produit.Photo) }}" class="img-fluid" alt="Photo du produit">
+                        <img src="{{ asset('uploads/images/' ~ produit.Photo) }}" class="img-fluid" alt="{{ produit.Nom }}">
                     </div>
                     <div class="col-md-6">
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <th scope="row">Nom</th>
+                                    <th scope="row">{{ 'produit.show.table.nom'|trans }}</th>
                                     <td>{{ produit.Nom }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Prix</th>
+                                    <th scope="row">{{ 'produit.show.table.prix'|trans }}</th>
                                     <td>{{ produit.Prix }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Stock</th>
+                                    <th scope="row">{{ 'produit.show.table.stock'|trans }}</th>
                                     <td>{{ produit.Stock }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Description</th>
+                                    <th scope="row">{{ 'produit.show.table.description'|trans }}</th>
                                     <td>{{ produit.Description }}</td>
                                 </tr>
                             </tbody>
@@ -42,10 +42,10 @@
             </div>
             {% if is_granted('ROLE_USER') %}
                 <div class="card-footer text-right">
-                    <a href="{{ path('app_panier_add', {'id': produit.id}) }}" class="btn btn-dark" >Ajouter au panier</a>
+                    <a href="{{ path('app_panier_add', {'id': produit.id}) }}" class="btn btn-dark" >{{ 'produit.show.btn.add_cart'|trans }}</a>
                     {%if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-dark">Éditer</a>
-                        <a href="{{ path('app_produit_delete', {'id': produit.id}) }}" class="btn btn-dark">Supprimer</a>
+                        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-dark">{{ 'produit.show.btn.edit'|trans }}</a>
+                        <a href="{{ path('app_produit_delete', {'id': produit.id}) }}" class="btn btn-dark">{{ 'produit.show.btn.delete'|trans }}</a>
                     {% endif %}
                 </div>
             {% endif %}
