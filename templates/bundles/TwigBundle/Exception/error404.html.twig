@@ -4,10 +4,48 @@
 
 {% block title %}Erreur 404 - Page non trouvée{% endblock %}
 
-{% block body %}
-    <h1>Page non trouvée</h1>
-    <p>La page que vous cherchez n'a pas été trouvée</p>
-    <p>Le code est : {{status_code}}</p>
-    <p>Le texte est : {{status_text}}</p>
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
 
+        .error-container {
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: auto;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #54BA36;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: #0275d8;
+            text-decoration: none;
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="error-container">
+        <h1>Page non trouvée</h1>
+        <p>La page que vous cherchez n'a pas été trouvée</p>
+        <p>Le code est : {{ status_code }}</p>
+        <p>Le texte est : {{ status_text }}</p>
+        <p><a href="/produit">Retour à la page d'accueil</a></p>
+    </div>
 {% endblock %}

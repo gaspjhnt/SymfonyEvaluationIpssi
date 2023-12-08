@@ -4,8 +4,47 @@
 
 {% block title %}Erreur 500 - Page non trouvée{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+
+        .error-container {
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: auto;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #54BA36;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: #0275d8;
+            text-decoration: none;
+        }
+
+    </style>
+{% endblock %}
+
 {% block body %}
-    <h1>Erreur 500 - Page non trouvée</h1>
-    <p>Désolé, la page que vous recherchez est introuvable.</p>
+    <div class="error-container">
+        <h1>Erreur 500</h1>
+        <p>Désolé, la page que vous recherchez est introuvable.</p>
+        <p><a href="/produit">Retour à la page d'accueil</p>
+    </div>
 
 {% endblock %}
