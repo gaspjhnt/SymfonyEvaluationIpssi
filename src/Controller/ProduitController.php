@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use function Symfony\Component\Translation\t;
 
 #[Route('/produit')]
 class ProduitController extends AbstractController
@@ -29,7 +31,7 @@ class ProduitController extends AbstractController
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         // Création du nv produit
         $produit = new Produit();
@@ -51,7 +53,7 @@ class ProduitController extends AbstractController
                     );
                 } catch (FileException $e) {
                     //Renvoie d'erreur
-                    $this->addFlash('danger', 'Erreur lors de l\'import de votre image');
+                    $this->addFlash('danger', $translator->trans('produit.message.error.image'));
                 }
                 $produit->setPhoto($newFilename);
             }
@@ -60,7 +62,7 @@ class ProduitController extends AbstractController
             $entityManager->flush();
 
             //Renvoie de reussite
-            $this->addFlash('success', 'Produit ajouté avec succès');
+            $this->addFlash('success', $translator->trans('produit.message.success.product_add'));
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
         return $this->render('produit/new.html.twig', [
@@ -80,7 +82,7 @@ class ProduitController extends AbstractController
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Produit $produit, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         //Prépa du formulaire
         $form = $this->createForm(ProduitType::class, $produit);
@@ -104,7 +106,7 @@ class ProduitController extends AbstractController
                     }
                 } catch (FileException $e) {
                     //Envoie d'erreur
-                    $this->addFlash('danger', 'Erreur lors de l\'import de votre image');
+                    $this->addFlash('danger', $translator->trans('produit.message.error.image_edit'));
                 }
                 $produit->setPhoto($newFilename);
             }
@@ -112,7 +114,7 @@ class ProduitController extends AbstractController
             $entityManager->flush();
 
             //Envoie de réussite
-            $this->addFlash('success', 'Produit modifié avec succès');
+            $this->addFlash('success', $translator->trans('panier.message.success.panier_edit'));
 
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }

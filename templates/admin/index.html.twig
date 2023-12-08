@@ -8,31 +8,31 @@
 
         <div class="card mb-4">
             <div class="card-header">
-                <h5 class="mb-0">Liste des utilisateurs</h5>
+                <h5 class="mb-0">{{ 'admin.user.title'|trans }}</h5>
             </div>
             <div class="card-body">
-                <p class="card-text">Voir tous les utilisateurs.</p>
-                <a href="{{ path('app_user_index') }}" class="btn btn-dark">Voir les utilisateurs</a>
+                <p class="card-text">{{ 'admin.user.see'|trans }}</p>
+                <a href="{{ path('app_user_index') }}" class="btn btn-dark">{{ 'admin.user.btn'|trans }}</a>
             </div>
         </div>
 
         <div class="card mb-4">
             <div class="card-header">
-                <h5 class="mb-0">Liste des paniers non vendus</h5>
+                <h5 class="mb-0">{{ 'admin.panier.title'|trans }}</h5>
             </div>
             <div class="card-body">
-                <p class="card-text">Voir tous les paniers non vendus.</p>
-                <a href="{{ path('app_panier_index') }}" class="btn btn-dark">Voir les paniers non vendus</a>
+                <p class="card-text">{{ 'admin.panier.see'|trans }}</p>
+                <a href="{{ path('app_panier_index') }}" class="btn btn-dark">{{ 'admin.panier.btn'|trans }}</a>
             </div>
         </div>
 
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0">Liste des produits</h5>
+                <h5 class="mb-0">{{ 'admin.produit.title'|trans }}</h5>
             </div>
             <div class="card-body">
-                <p class="card-text">Voir tous les produits.</p>
-                <a href="{{ path('app_produit_index') }}" class="btn btn-primary">Voir les produits</a>
+                <p class="card-text">{{ 'admin.produit.see'|trans }}</p>
+                <a href="{{ path('app_produit_index') }}" class="btn btn-primary">{{ 'admin.produit.btn'|trans }}</a>
             </div>
         </div>
     </div>

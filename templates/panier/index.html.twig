@@ -9,19 +9,20 @@
 
 {% block body %}
     <div class="container mt-5">
-        <h1 class="mb-4 text-center">Liste des Paniers</h1>
+        <h1 class="mb-4 text-center">{{ 'panier.index.title'|trans }}</h1>
 
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Utilisateur</th>
-                <th scope="col">Contenu</th>
+                <th scope="col">{{ 'panier.index.table.identifiant'|trans }}</th>
+                <th scope="col">{{ 'panier.index.table.user'|trans }}</th>
+                <th scope="col">{{ 'panier.index.table.contenu'|trans }}</th>
             </tr>
             </thead>
             <tbody>
             {% for panier in paniers %}
                 {% if not panier.etat %}
+                    {% set isOk = false %}
                     <tr>
                         <td>{{ panier.id }}</td>
                         <td>
@@ -41,12 +42,12 @@
                 {% endif %}
             {% else %}
                 <tr>
-                    <td colspan="4">Aucun enregistrement trouvé</td>
+                    <td colspan="4">{{ 'panier.index.table.no_table'|trans }}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
 
-        <a href="{{ path('app_admin') }}" class="btn btn-dark">Retour au Dashboard</a>
+        <a href="{{ path('app_admin') }}" class="btn btn-dark">{{ 'panier.index.back_dashboard'|trans }}</a>
     </div>
 {% endblock %}

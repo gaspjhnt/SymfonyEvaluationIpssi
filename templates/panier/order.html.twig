@@ -4,31 +4,23 @@
 
 {% block body %}
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Votre Commande</h1>
+        <h1 class="text-center mb-4">{{ 'panier.order.title'|trans }}</h1>
 
         {% if panier is not empty %}
-            {% if is_granted('ROLE_ADMIN') %}
-                <div class="text-center mb-4">
-                    Commande de <a href="{{ path('app_user_show',{'id':panier.user.id}) }}">
-                        {{ panier.user.nom ~ " " ~ panier.user.prenom }}
-                    </a>
-                    <hr>
-                </div>
-            {% endif %}
 
-            <p class="text-center mb-3">Réalisée le {{ panier.dateAchat|date('d-m-Y') }}</p>
+            <p class="text-center mb-3">{{ 'panier.order.date'|trans }} {{ panier.dateAchat|date('d-m-Y') }}</p>
 
             <div class="card">
                 <div class="card-body">
-                    <h3 class="card-title mb-3">Produits commandés:</h3>
+                    <h3 class="card-title mb-3">{{ 'panier.order.products'|trans }}:</h3>
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">Image</th>
-                            <th scope="col">Nom</th>
-                            <th scope="col">Prix</th>
-                            <th scope="col">Quantité</th>
-                            <th scope="col">Total</th>
+                            <th scope="col">{{ 'panier.order.table.image'|trans }}</th>
+                            <th scope="col">{{ 'panier.order.table.nom'|trans }}</th>
+                            <th scope="col">{{ 'panier.order.table.prix'|trans }}</th>
+                            <th scope="col">{{ 'panier.order.table.quantite'|trans }}</th>
+                            <th scope="col">{{ 'panier.order.table.total'|trans }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -51,7 +43,7 @@
                     </table>
 
                     <div class="d-flex justify-content-between mt-3">
-                        <h5>Total payé:</h5>
+                        <h5>{{ 'panier.order.total'|trans }}:</h5>
                         <h5>{{ total }}€</h5>
                     </div>
                 </div>
@@ -59,15 +51,15 @@
 
             {% if app.user == panier.user %}
                 <div class="d-flex justify-content-center mt-3">
-                    <a href="{{ path('app_user_show', {'id': panier.user.id}) }}" class="btn btn-dark">Voir vos commandes</a>
+                    <a href="{{ path('app_user_show', {'id': panier.user.id}) }}" class="btn btn-dark">{{ 'panier.order.see_commands'|trans }}</a>
                 </div>
             {% endif %}
         {% else %}
             <div class="d-flex flex-column">
                 <div class="alert alert-info" role="alert">
-                    Votre commande est vide... (comment êtes-vous arrivé ici?)
+                    {{ 'panier.order.empty_command'|trans }}
                 </div>
-                <a href="{{ path('app_accueil') }}" class="btn btn-primary">Commencer vos achats</a>
+                <a href="{{ path('app_accueil') }}" class="btn btn-primary">{{ 'parnier.order.begin_buy'|trans }}</a>
             </div>
         {% endif %}
     </div>

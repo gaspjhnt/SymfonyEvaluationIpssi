@@ -12,7 +12,7 @@
 <div class="text-center">
     <h1>PearPhone</h1>
     {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('app_produit_index') }}" class="btn btn-dark">Administration produit</a>
+        <a href="{{ path('app_produit_index') }}" class="btn btn-dark">{{ 'accueil.btn_admin_produit'|trans }}</a>
     {% endif %}
 </div>
 
@@ -36,6 +36,8 @@
                                     </a>
                                 </div>
                             {% endif %}
+                        {% else %}
+                            <p class="text-center mt-5">{{ 'accueil.no_product'|trans }}</p>
                         {% endfor %}
                     </div>
                 </div>
